@@ -10,10 +10,10 @@
 
 @implementation ASHGameBoardView
 
-//-(void)drawRect:(CGRect)rect {
-//    [super drawRect:rect];
-//    
-//    
-//}
+-(void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    NSUInteger width = [self.]
+}
 
 @end

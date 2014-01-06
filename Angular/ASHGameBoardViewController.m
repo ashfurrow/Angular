@@ -14,7 +14,7 @@
 // Views
 #import "ASHGameBoardView.h"
 
-@interface ASHGameBoardViewController ()
+@interface ASHGameBoardViewController () <ASHGameBoardViewDataSource>
 
 @property (nonatomic, strong) ASHGameBoardViewModel *viewModel;
 
@@ -36,6 +36,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    if ([self.view isKindOfClass:[ASHGameBoardView class]]) {
+        [(ASHGameBoardView *)self.view setDataSource:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning
