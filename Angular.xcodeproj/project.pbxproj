@@ -66,6 +66,7 @@
 		5E246DA6187A32A500C8BDED /* ASHGameBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoardView.m; sourceTree = "<group>"; };
 		5E246DA9187A334900C8BDED /* ASHGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameBoard.h; sourceTree = "<group>"; };
 		5E246DAA187A334900C8BDED /* ASHGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoard.m; sourceTree = "<group>"; };
+		5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHGameBoardGeometry.h; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -190,6 +191,7 @@
 			children = (
 				5E246DA9187A334900C8BDED /* ASHGameBoard.h */,
 				5E246DAA187A334900C8BDED /* ASHGameBoard.m */,
+				5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */,
 			);
 			name = Models;
 			sourceTree = "<group>";

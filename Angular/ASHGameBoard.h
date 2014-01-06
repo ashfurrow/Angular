@@ -6,15 +6,7 @@
 //  Copyright (c) 2014 Ash Furrow. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-struct ASHGameBoardPoint {
-    NSUInteger x;
-    NSUInteger y;
-};
-
-typedef struct ASHGameBoardPoint ASHGameBoardPoint;
-
+#import "ASHGameBoardGeometry.h"
 
 extern const NSUInteger ASHGameBoardDefaultWidth;
 extern const NSUInteger ASHGameBoardDefaultHeight;
