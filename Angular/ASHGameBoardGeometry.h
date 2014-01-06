@@ -7,8 +7,8 @@
 //
 
 struct ASHGameBoardPoint {
-    NSUInteger x;
-    NSUInteger y;
+    NSInteger x;
+    NSInteger y;
 };
 
 typedef struct ASHGameBoardPoint ASHGameBoardPoint;
@@ -19,7 +19,7 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
     ASHGameBoardPositionStatePlayerB
 };
 
-static inline ASHGameBoardPoint ASHGameBoardPointMake(NSUInteger x, NSUInteger y)
+static inline ASHGameBoardPoint ASHGameBoardPointMake(NSInteger x, NSInteger y)
 {
     ASHGameBoardPoint p; p.x = x; p.y = y; return p;
 }
