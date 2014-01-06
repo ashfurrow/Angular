@@ -149,7 +149,21 @@
 }
 
 -(BOOL)playerHasValidMove:(ASHGameBoardPositionState)player {
-    return YES;
+    BOOL played = NO;
+    for (NSUInteger x = 0; x < self.gameBoard.width && played == NO; x++) {
+        for (NSUInteger y = 0; y < self.gameBoard.height && played == NO; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            
+            ASHGameModel *model = [self copy];
+            BOOL success = [model makeMove:point forPlayer:player] != nil;
+            
+            if (success) {
+                played = YES;
+            }
+        }
+    }
+    
+    return played;
 }
 
 -(ASHGameModelBoardState)stateOfBoard {
