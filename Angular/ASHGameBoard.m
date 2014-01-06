@@ -30,6 +30,7 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     self.height = height;
     
     self.board = malloc(sizeof(ASHGameBoardPositionState) * self.width * self.height);
+    [self clearInitialBoard];
     
     return self;
 }
@@ -40,18 +41,26 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
 
 #pragma mark - Private Methods
 
+-(void)clearInitialBoard {
+    for (NSUInteger x = 0; x < self.width; x++) {
+        for (NSUInteger y = 0; y < self.height; y++) {
+            [self setState:ASHGameBoardPositionStateUndecided forPoint:ASHGameBoardPointMake(x, y)];
+        }
+    }
+}
+
 -(ASHGameBoardPositionState*)positionStateAtPoint:(ASHGameBoardPoint)point {
     return &self.board[point.x * self.width + point.y];
 }
 
 #pragma mark - Public Methods
 
--(ASHGameBoardPositionState)stateForPosition:(ASHGameBoardPoint)point {
+-(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point {
     ASHGameBoardPositionState *pointer = [self positionStateAtPoint:point];
     return *pointer;
 }
 
--(void)setState:(ASHGameBoardPositionState)state forPosition:(ASHGameBoardPoint)point {
+-(void)setState:(ASHGameBoardPositionState)state forPoint:(ASHGameBoardPoint)point {
     ASHGameBoardPositionState *pointer = [self positionStateAtPoint:point];
     *pointer = state;
 }

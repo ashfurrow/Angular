@@ -22,30 +22,22 @@
 
 @implementation ASHGameBoardViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self == nil) return nil;
-    
-    self.viewModel = [[ASHGameBoardViewModel alloc] init];
-    
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.viewModel = [[ASHGameBoardViewModel alloc] init];
     
     if ([self.view isKindOfClass:[ASHGameBoardView class]]) {
         [(ASHGameBoardView *)self.view setDataSource:self];
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.view setNeedsDisplay];
 }
 
 #pragma mark - ASHGameBoardViewDataSource Methods

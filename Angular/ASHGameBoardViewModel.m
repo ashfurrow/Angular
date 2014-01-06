@@ -29,11 +29,27 @@
     
     self.gameBoard = [[ASHGameBoard alloc] initWithWidth:ASHGameBoardDefaultWidth height:ASHGameBoardDefaultHeight];
     
+    self.gameBoardWidth = self.gameBoard.width;
+    self.gameBoardHeight = self.gameBoard.height;
+    
+    [self setupInitialBoard];
+    
     return self;
 }
 
+#pragma mark - Private Methods
+
+-(void)setupInitialBoard {
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(3, 3)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(4, 4)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(3, 4)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(4, 3)];
+}
+
+#pragma mark - Public Methods
+
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point {
-    return [self.gameBoard stateForPosition:point];
+    return [self.gameBoard stateForPoint:point];
 }
 
 @end
