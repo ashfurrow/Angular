@@ -86,10 +86,61 @@
     ASHGameBoardPositionState state = [self.gameBoard stateForPoint:point];
     if (state != ASHGameBoardPositionStateUndecided) {
         valid = NO;
+    } else {
+        // Check for adjacent blocks in all directions
+        if (![self direction:ASHGameBoardPointMake(-1, -1) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(0, -1) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(1, -1) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(-1, 0) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(1, 0) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(-1, 1) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(0, 1) point:point changesBoardForPlayer:self.player] &&
+            ![self direction:ASHGameBoardPointMake(1, 1) point:point changesBoardForPlayer:self.player]) {
+            valid = NO;
+        }
     }
-    // TODO: Check for validity of move
     
     return valid;
+}
+
+-(BOOL)direction:(ASHGameBoardPoint)vector point:(ASHGameBoardPoint)point changesBoardForPlayer:(ASHGameBoardViewModelPlayer)player {
+    // Initial requirement: point + vector must be within the board and be the player's token
+    NSInteger newPointX = vector.x + point.x;
+    NSInteger newPointY = vector.y + point.y;
+    if (newPointX < 0 || newPointX >= self.gameBoardWidth ||
+        newPointY < 0 || newPointY >= self.gameBoardHeight) {
+        return NO;
+    } else {
+        ASHGameBoardPoint newPoint = ASHGameBoardPointMake(newPointX, newPointY);
+        
+        ASHGameBoardPositionState desiredState = player == ASHGameBoardViewModelPlayerA ? ASHGameBoardPositionStatePlayerB : ASHGameBoardPositionStatePlayerA;
+        if ([self stateForPoint:newPoint] != desiredState) {
+            return NO;
+        } else {
+            return [self recursiveDirection:vector point:newPoint changesBoardForPlayer:player];
+        }
+    }
+}
+
+-(BOOL)recursiveDirection:(ASHGameBoardPoint)vector point:(ASHGameBoardPoint)point changesBoardForPlayer:(ASHGameBoardViewModelPlayer)player {
+    
+    // Initial requirement: point + vector must be within the board and be the player's token
+    NSInteger newPointX = vector.x + point.x;
+    NSInteger newPointY = vector.y + point.y;
+    if (newPointX < 0 || newPointX >= self.gameBoardWidth ||
+        newPointY < 0 || newPointY >= self.gameBoardHeight) {
+        return NO;
+    } else {
+        // If the state at X is the player's, then they can make the move.
+        ASHGameBoardPoint newPoint = ASHGameBoardPointMake(newPointX, newPointY);
+        ASHGameBoardPositionState desiredState = player == ASHGameBoardViewModelPlayerA ? ASHGameBoardPositionStatePlayerA : ASHGameBoardPositionStatePlayerB;
+        
+        if ([self stateForPoint:newPoint] == desiredState) {
+            return YES;
+        } else {
+            return [self recursiveDirection:vector point:newPoint changesBoardForPlayer:player];
+        }
+    }
 }
 
 -(void)checkForWin {
