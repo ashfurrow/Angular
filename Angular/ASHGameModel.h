@@ -8,9 +8,9 @@
 
 @class ASHGameBoard;
 
-@interface ASHGameModel : NSObject
+@interface ASHGameModel : NSObject <NSCopying>
 
--(instancetype)initWithGameBoard:(ASHGameBoard *)gameBoard;
+-(id)initWithInitialBoard;
 
 @property (nonatomic, readonly) ASHGameBoard *gameBoard;
 

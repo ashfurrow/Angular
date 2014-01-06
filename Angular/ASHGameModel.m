@@ -17,6 +17,20 @@
 
 @implementation ASHGameModel
 
+-(id)initWithInitialBoard {
+    self = [super init];
+    if (self == nil) return nil;
+    
+    self.gameBoard = [[ASHGameBoard alloc] initWithWidth:ASHGameBoardDefaultWidth height:ASHGameBoardDefaultHeight];
+    
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(3, 3)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(4, 4)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(3, 4)];
+    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(4, 3)];
+    
+    return self;
+}
+
 -(instancetype)initWithGameBoard:(ASHGameBoard *)gameBoard {
     self = [super init];
     if (self == nil) return nil;
@@ -24,6 +38,12 @@
     self.gameBoard = [gameBoard copy];
     
     return self;
+}
+
+#pragma mark - NSCopying methods
+
+-(id)copyWithZone:(NSZone *)zone {
+    return [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
 }
 
 #pragma mark - Public Methods

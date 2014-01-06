@@ -19,7 +19,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 @interface ASHGameBoardViewModel ()
 
 // Private Properties
-@property (nonatomic, strong) ASHGameBoard *gameBoard;
+@property (nonatomic, strong) ASHGameModel *gameModel;
 
 // Private Access
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
@@ -36,10 +36,10 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     self = [super init];
     if (self == nil) return nil;
     
-    self.gameBoard = [[ASHGameBoard alloc] initWithWidth:ASHGameBoardDefaultWidth height:ASHGameBoardDefaultHeight];
+    self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
     
-    self.gameBoardWidth = self.gameBoard.width;
-    self.gameBoardHeight = self.gameBoard.height;
+    self.gameBoardWidth = self.gameModel.gameBoard.width;
+    self.gameBoardHeight = self.gameModel.gameBoard.height;
     
     @weakify(self);
     self.gameBoardUpdatedSignal = [RACSubject subject];
@@ -53,19 +53,10 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
         [self checkForWin];
     }];
     
-    [self setupInitialBoard];
-    
     return self;
 }
 
 #pragma mark - Private Methods
-
--(void)setupInitialBoard {
-    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(3, 3)];
-    [self.gameBoard setState:ASHGameBoardPositionStatePlayerA forPoint:ASHGameBoardPointMake(4, 4)];
-    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(3, 4)];
-    [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(4, 3)];
-}
 
 -(void)switchPlayer {
     self.player = !self.player;
@@ -79,7 +70,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
         for (NSUInteger y = 0; y < self.gameBoardHeight && played == NO; y++) {
             ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
             
-            ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
+            ASHGameModel *model = [self.gameModel copy];
             BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)] != nil;
             
             if (success) {
@@ -91,8 +82,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 }
 
 -(void)checkForWin {
-    ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
-    ASHGameBoardPositionState state = model.stateOfBoard;
+    ASHGameBoardPositionState state = self.gameModel.stateOfBoard;
     
     if (state != ASHGameBoardPositionStateUndecided) {
         [(RACSubject *)self.gameOverSignal sendNext:@(state)];
@@ -103,16 +93,16 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 #pragma mark - Public Methods
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point {
-    return [self.gameBoard stateForPoint:point];
+    return [self.gameModel.gameBoard stateForPoint:point];
 } 
 
 -(BOOL)makePlay:(ASHGameBoardPoint)point {
-    ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
+    ASHGameModel *model = [self.gameModel copy];
     ASHGameModel *newModel = [model makeMove:point forPlayer:stateForPlayer(self.player)];
     if (newModel != nil) {
         [self switchPlayer];
         [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
-        self.gameBoard = newModel.gameBoard;
+        self.gameModel = newModel;
     }
     
     return newModel != nil;
