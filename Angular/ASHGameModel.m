@@ -168,8 +168,41 @@
 }
 
 -(ASHGameModelBoardState)stateOfBoard {
-    // TODO: Determine board state
-    return ASHGameModelBoardStateUndecided;
+    /*
+     Game over conditions: 
+     - the board is full
+     - players A nor B have a valid move
+     */
+    
+    NSUInteger playerACount = 0, playerBCount = 0;
+    BOOL boardIsFull = YES;
+    for (NSUInteger x = 0; x < self.gameBoard.width; x++) {
+        for (NSUInteger y = 0; y < self.gameBoard.height; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            ASHGameBoardPositionState state = [self.gameBoard stateForPoint:point];
+            if (state == ASHGameBoardPositionStateUndecided) {
+                boardIsFull = NO;
+            } else if (state == ASHGameBoardPositionStatePlayerA) {
+                playerACount++;
+            } else {
+                playerBCount++;
+            }
+        }
+    }
+    
+    BOOL playerHasValidMove = [self playerHasValidMove:ASHGameBoardPositionStatePlayerA] || [self playerHasValidMove:ASHGameBoardPositionStatePlayerB];
+    
+    if (boardIsFull == YES || playerHasValidMove == NO) {
+        if (playerACount > playerBCount) {
+            return ASHGameModelBoardStatePlayerA;
+        } else if (playerBCount > playerACount) {
+            return ASHGameModelBoardStatePlayerB;
+        } else {
+            return ASHGameModelBoardStateTie;
+        }
+    } else {
+        return ASHGameModelBoardStateUndecided;
+    }
 }
 
 @end
