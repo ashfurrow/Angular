@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardViewModelPlayer) {
 @property (nonatomic, readonly) NSUInteger gameBoardHeight;
 @property (nonatomic, readonly) ASHGameBoardViewModelPlayer player;
 @property (nonatomic, readonly) RACSignal *gameBoardUpdatedSignal;
+@property (nonatomic, readonly) RACSignal *gameOverSignal;
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
 -(BOOL)makePlay:(ASHGameBoardPoint)point;

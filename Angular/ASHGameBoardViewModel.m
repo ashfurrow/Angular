@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
 @property (nonatomic, strong) RACSubject *gameBoardUpdatedSignal;
+@property (nonatomic, strong) RACSubject *gameOverSignal;
 
 @end
 
@@ -34,7 +35,17 @@
     self.gameBoardWidth = self.gameBoard.width;
     self.gameBoardHeight = self.gameBoard.height;
     
+    @weakify(self);
     self.gameBoardUpdatedSignal = [RACSubject subject];
+    [self.gameBoardUpdatedSignal subscribeNext:^(id x) {
+        @strongify(self);
+        
+        if (self.player == ASHGameBoardViewModelPlayerB) {
+            [self makeAIMove];
+        }
+        
+        [self checkForWin];
+    }];
     
     [self setupInitialBoard];
     
@@ -54,8 +65,42 @@
     self.player = !self.player;
 }
 
+-(void)makeAIMove {
+    // Stupid AI for now
+    // TODO: Write smarter AI
+    BOOL played = NO;
+    for (NSUInteger x = 0; x < self.gameBoardWidth && played == NO; x++) {
+        for (NSUInteger y = 0; y < self.gameBoardHeight && played == NO; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            if ([self playIsLegalForCurrentPlayer:point]) {
+                [self makePlay:point];
+                played = YES;
+            }
+        }
+    }
+}
+
 -(BOOL)playIsLegalForCurrentPlayer:(ASHGameBoardPoint)point {
-    return YES;
+    BOOL valid = YES;
+    
+    ASHGameBoardPositionState state = [self.gameBoard stateForPoint:point];
+    if (state != ASHGameBoardPositionStateUndecided) {
+        valid = NO;
+    }
+    // TODO: Check for validity of move
+    
+    return valid;
+}
+
+-(void)checkForWin {
+    ASHGameBoardPositionState state = ASHGameBoardPositionStateUndecided;
+    
+    // TODO: Check for win
+    
+    if (state != ASHGameBoardPositionStateUndecided) {
+        [(RACSubject *)self.gameOverSignal sendNext:@(state)];
+        [(RACSubject *)self.gameOverSignal sendCompleted];
+    }
 }
 
 #pragma mark - Public Methods
