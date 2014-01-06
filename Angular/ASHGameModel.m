@@ -116,17 +116,15 @@
 }
 
 -(BOOL)propagateInAllDirectionsFromPoint:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
-    //TODO: Sometimes doesn't propagate left – typically on the bottom.
-    //TODO: Not propagating in long, straight lines. 
-    BOOL propagated =
-    [self propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake( 1, -1) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake(-1,  0) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake( 1,  0) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake(-1,  1) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake( 0,  1) fromPoint:point initialPoint:point forPlayer:player] ||
-    [self propagateInDirection:ASHGameBoardPointMake( 1,  1) fromPoint:point initialPoint:point forPlayer:player];
+    BOOL propagated = NO;
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1,  0) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1,  0) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1,  1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 0,  1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1,  1) fromPoint:point initialPoint:point forPlayer:player];
     
     if (propagated) {
         [self.gameBoard setState:player forPoint:point];
