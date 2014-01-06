@@ -17,6 +17,5 @@ extern const NSUInteger ASHGameBoardDefaultHeight;
 -(instancetype)initWithWidth:(NSUInteger)width height:(NSUInteger)height;
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
--(void)setState:(ASHGameBoardPositionState)state forPoint:(ASHGameBoardPoint)point;
 
 @end
