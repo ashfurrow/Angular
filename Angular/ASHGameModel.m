@@ -77,7 +77,7 @@
             
             return success;
         } else {
-            // state is either friendly or undecided stop recursion
+            // state is either friendly or undecided – stop recursion
             return NO;
         }
     } else {

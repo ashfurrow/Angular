@@ -45,7 +45,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     self.gameOverSignal = [RACSubject subject];
     
     @weakify(self);
-    [self.gameBoardUpdatedSignal subscribeNext:^(id x) {
+    [self.gameBoardUpdatedSignal subscribeNext:^(id _) {
         @strongify(self);
         
         if ([self.gameModel playerHasValidMove:stateForPlayer(self.player)] == NO) {
