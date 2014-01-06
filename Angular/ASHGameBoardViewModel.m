@@ -80,7 +80,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
             ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
             
             ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
-            BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)];
+            BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)] != nil;
             
             if (success) {
                 [self makePlay:point];
@@ -108,13 +108,14 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 
 -(BOOL)makePlay:(ASHGameBoardPoint)point {
     ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
-    BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)];
-    if (success) {
+    ASHGameModel *newModel = [model makeMove:point forPlayer:stateForPlayer(self.player)];
+    if (newModel != nil) {
         [self switchPlayer];
-        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:nil];
+        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
+        self.gameBoard = newModel.gameBoard;
     }
     
-    return success;
+    return newModel != nil;
 }
 
 @end

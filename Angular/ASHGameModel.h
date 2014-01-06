@@ -14,7 +14,8 @@
 
 @property (nonatomic, readonly) ASHGameBoard *gameBoard;
 
--(BOOL)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player; // Returns success of move attempt
+// Returns a new game model representing the new board position, or nil if unnacceptable move.
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player;
 -(ASHGameBoardPositionState)stateOfBoard;
 
 @end

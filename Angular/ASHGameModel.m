@@ -26,16 +26,9 @@
     return self;
 }
 
-#pragma mark - Private Methods
-
--(ASHGameModel *)move:(ASHGameBoardPoint)point isValidForPlayer:(ASHGameBoardPositionState)player {
-    //TODO: This.
-    return nil;
-}
-
 #pragma mark - Public Methods
 
--(BOOL)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player {
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player {
     //TODO: This. 
     return NO;
 }
