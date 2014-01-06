@@ -14,9 +14,7 @@
 
 @property (nonatomic, readonly) ASHGameBoard *gameBoard;
 
-// Returns nil if move is invalid.
--(ASHGameModel *)move:(ASHGameBoardPoint)point isValidForPlayer:(ASHGameBoardPositionState)player;
-
+-(BOOL)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player; // Returns success of move attempt
 -(ASHGameBoardPositionState)stateOfBoard;
 
 @end

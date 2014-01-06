@@ -11,6 +11,11 @@
 #import "ASHGameBoard.h"
 #import "ASHGameModel.h"
 
+static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
+    return player == ASHGameBoardViewModelPlayerA ? ASHGameBoardPositionStatePlayerA : ASHGameBoardPositionStatePlayerB;
+}
+
+
 @interface ASHGameBoardViewModel ()
 
 // Private Properties
@@ -73,7 +78,11 @@
     for (NSUInteger x = 0; x < self.gameBoardWidth && played == NO; x++) {
         for (NSUInteger y = 0; y < self.gameBoardHeight && played == NO; y++) {
             ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
-            if ([self playIsLegalForCurrentPlayer:point]) {
+            
+            ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
+            BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)];
+            
+            if (success) {
                 [self makePlay:point];
                 played = YES;
             }
@@ -81,23 +90,9 @@
     }
 }
 
--(BOOL)playIsLegalForCurrentPlayer:(ASHGameBoardPoint)point {
-    BOOL valid = YES;
-    
-    ASHGameBoardPositionState state = [self.gameBoard stateForPoint:point];
-    if (state != ASHGameBoardPositionStateUndecided) {
-        valid = NO;
-    } else {
-        // TODO: Check for adjacent blocks in all directions
-    }
-    
-    return valid;
-}
-
 -(void)checkForWin {
-    ASHGameBoardPositionState state = ASHGameBoardPositionStateUndecided;
-    
-    //TODO: Check for win condition
+    ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
+    ASHGameBoardPositionState state = model.stateOfBoard;
     
     if (state != ASHGameBoardPositionStateUndecided) {
         [(RACSubject *)self.gameOverSignal sendNext:@(state)];
@@ -112,27 +107,14 @@
 } 
 
 -(BOOL)makePlay:(ASHGameBoardPoint)point {
-    BOOL valid = [self playIsLegalForCurrentPlayer:point];
-    
-    if (valid) {
-        ASHGameBoardPositionState state = ASHGameBoardPositionStateUndecided;
-        
-        switch (self.player) {
-            case ASHGameBoardViewModelPlayerA:
-                state = ASHGameBoardPositionStatePlayerA;
-                break;
-            case ASHGameBoardViewModelPlayerB:
-                state = ASHGameBoardPositionStatePlayerB;
-                break;
-        }
-        
-        [self.gameBoard setState:state forPoint:point];
-        // TODO: Update board
+    ASHGameModel *model = [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
+    BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)];
+    if (success) {
         [self switchPlayer];
         [(RACSubject *)self.gameBoardUpdatedSignal sendNext:nil];
     }
     
-    return valid;
+    return success;
 }
 
 @end
