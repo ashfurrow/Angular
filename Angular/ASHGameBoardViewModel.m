@@ -19,6 +19,7 @@
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
+@property (nonatomic, strong) RACSubject *gameBoardUpdatedSignal;
 
 @end
 
@@ -32,6 +33,8 @@
     
     self.gameBoardWidth = self.gameBoard.width;
     self.gameBoardHeight = self.gameBoard.height;
+    
+    self.gameBoardUpdatedSignal = [RACSubject subject];
     
     [self setupInitialBoard];
     
@@ -47,14 +50,41 @@
     [self.gameBoard setState:ASHGameBoardPositionStatePlayerB forPoint:ASHGameBoardPointMake(4, 3)];
 }
 
+-(void)switchPlayer {
+    self.player = !self.player;
+}
+
+-(BOOL)playIsLegalForCurrentPlayer:(ASHGameBoardPoint)point {
+    return YES;
+}
+
 #pragma mark - Public Methods
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point {
     return [self.gameBoard stateForPoint:point];
 } 
 
--(void)switchPlayer {
-    self.player = !self.player;
+-(BOOL)makePlay:(ASHGameBoardPoint)point {
+    BOOL valid = [self playIsLegalForCurrentPlayer:point];
+    
+    if (valid) {
+        ASHGameBoardPositionState state = ASHGameBoardPositionStateUndecided;
+        
+        switch (self.player) {
+            case ASHGameBoardViewModelPlayerA:
+                state = ASHGameBoardPositionStatePlayerA;
+                break;
+            case ASHGameBoardViewModelPlayerB:
+                state = ASHGameBoardPositionStatePlayerB;
+                break;
+        }
+        
+        [self.gameBoard setState:state forPoint:point];
+        [self switchPlayer];
+        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:nil];
+    }
+    
+    return valid;
 }
 
 @end

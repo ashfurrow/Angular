@@ -34,6 +34,10 @@
     self.view.dataSource = self;
     
     @weakify(self);
+    [[self.viewModel gameBoardUpdatedSignal] subscribeNext:^(id x) {
+        @strongify(self);
+        [self.view setNeedsDisplay];
+    }];
     
     UIGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:nil];
     [recognizer.rac_gestureSignal subscribeNext:^(UITapGestureRecognizer *recognizer) {
@@ -42,7 +46,7 @@
         ASHGameBoardPoint point = [self.view pointAtPoint:[recognizer locationInView:self.view]];
         NSLog(@"%d, %d", point.x, point.y);
         
-        [self.viewModel switchPlayer];
+        [self.viewModel makePlay:point];
     }];
     [self.view addGestureRecognizer:recognizer];
 }
