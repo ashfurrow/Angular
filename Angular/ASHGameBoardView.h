@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Ash Furrow. All rights reserved.
 //
 
-#import "ASHGameBoardGeometry.h"
-
 typedef NS_ENUM(NSUInteger, ASHGameBoardViewDisplayType) {
     ASHGameBoardViewDisplayTypeEmpty = 0,
     ASHGameBoardViewDisplayTypeRed,

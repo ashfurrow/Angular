@@ -26,6 +26,7 @@
 		5E246DA4187A329900C8BDED /* ASHGameBoardViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DA3187A329900C8BDED /* ASHGameBoardViewModel.m */; };
 		5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DA6187A32A500C8BDED /* ASHGameBoardView.m */; };
 		5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAA187A334900C8BDED /* ASHGameBoard.m */; };
+		5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAE187A56A600C8BDED /* ASHGameModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		5E246DA9187A334900C8BDED /* ASHGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameBoard.h; sourceTree = "<group>"; };
 		5E246DAA187A334900C8BDED /* ASHGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoard.m; sourceTree = "<group>"; };
 		5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHGameBoardGeometry.h; sourceTree = "<group>"; };
+		5E246DAD187A56A600C8BDED /* ASHGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameModel.h; sourceTree = "<group>"; };
+		5E246DAE187A56A600C8BDED /* ASHGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameModel.m; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -189,9 +192,11 @@
 		5E246DA8187A333800C8BDED /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */,
 				5E246DA9187A334900C8BDED /* ASHGameBoard.h */,
 				5E246DAA187A334900C8BDED /* ASHGameBoard.m */,
-				5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */,
+				5E246DAD187A56A600C8BDED /* ASHGameModel.h */,
+				5E246DAE187A56A600C8BDED /* ASHGameModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */,
 				5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */,
 				5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */,
 				5E246DA0187A309D00C8BDED /* ASHGameBoardViewController.m in Sources */,
