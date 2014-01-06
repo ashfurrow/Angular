@@ -25,7 +25,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
-@property (nonatomic, strong) RACSubject *gameBoardUpdatedSignal;
+@property (nonatomic, strong) RACSignal *gameBoardUpdatedSignal;
 @property (nonatomic, strong) RACSubject *gameOverSignal;
 
 @end
@@ -41,8 +41,10 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     self.gameBoardWidth = self.gameModel.gameBoard.width;
     self.gameBoardHeight = self.gameModel.gameBoard.height;
     
+    self.gameBoardUpdatedSignal = RACObserve(self, gameModel.gameBoard);
+    self.gameOverSignal = [RACSubject subject];
+    
     @weakify(self);
-    self.gameBoardUpdatedSignal = [RACSubject subject];
     [self.gameBoardUpdatedSignal subscribeNext:^(id x) {
         @strongify(self);
         
@@ -114,7 +116,6 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     if (newModel != nil) {
         [self switchPlayer];
         self.gameModel = newModel;
-        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
     }
     
     return newModel != nil;
