@@ -28,4 +28,6 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardViewDisplayType) {
 
 @property (nonatomic, weak) id<ASHGameBoardViewDataSource> dataSource;
 
+-(ASHGameBoardPoint)pointAtPoint:(CGPoint)point;
+
 @end

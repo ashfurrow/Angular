@@ -19,4 +19,8 @@
 // Custom #imports
 #import "ASHGameBoardGeometry.h"
 
+// External Frameworks
+#import <ReactiveCocoa/ReactiveCocoa.h>
+#import <libextobjc/EXTScope.h>
+
 #endif

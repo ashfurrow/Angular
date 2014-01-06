@@ -16,7 +16,9 @@
 
 @interface ASHGameBoardViewController () <ASHGameBoardViewDataSource>
 
+@property (nonatomic, strong) ASHGameBoardView *view;
 @property (nonatomic, strong) ASHGameBoardViewModel *viewModel;
+
 
 @end
 
@@ -29,9 +31,20 @@
     
     self.viewModel = [[ASHGameBoardViewModel alloc] init];
     
-    if ([self.view isKindOfClass:[ASHGameBoardView class]]) {
-        [(ASHGameBoardView *)self.view setDataSource:self];
-    }
+    self.view.dataSource = self;
+    
+    @weakify(self);
+    
+    UIGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:nil];
+    [recognizer.rac_gestureSignal subscribeNext:^(UITapGestureRecognizer *recognizer) {
+        @strongify(self);
+        
+        ASHGameBoardPoint point = [self.view pointAtPoint:[recognizer locationInView:self.view]];
+        NSLog(@"%d, %d", point.x, point.y);
+        
+        [self.viewModel switchPlayer];
+    }];
+    [self.view addGestureRecognizer:recognizer];
 }
 
 -(void)viewWillAppear:(BOOL)animated {

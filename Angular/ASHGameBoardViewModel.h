@@ -8,11 +8,20 @@
 
 #import "RVMViewModel.h"
 
+
+typedef NS_ENUM(NSUInteger, ASHGameBoardViewModelPlayer) {
+    ASHGameBoardViewModelPlayerA = 0,
+    ASHGameBoardViewModelPlayerB
+};
+
 @interface ASHGameBoardViewModel : RVMViewModel
 
 @property (nonatomic, readonly) NSUInteger gameBoardWidth;
 @property (nonatomic, readonly) NSUInteger gameBoardHeight;
+@property (nonatomic, readonly) ASHGameBoardViewModelPlayer player;
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
+
+-(void)switchPlayer;
 
 @end

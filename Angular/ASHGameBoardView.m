@@ -10,6 +10,23 @@
 
 @implementation ASHGameBoardView
 
+#pragma mark - Public Methods
+
+-(ASHGameBoardPoint)pointAtPoint:(CGPoint)point {
+    NSUInteger cols = [self.dataSource numberOfColumnsForGameBoardView:self];
+    NSUInteger rows = [self.dataSource numberOfRowsForGameBoardView:self];
+    
+    const NSUInteger colWidth = CGRectGetWidth(self.bounds) / cols;
+    const NSUInteger rowHeight = CGRectGetHeight(self.bounds) / rows;
+    
+    NSUInteger x = ((NSUInteger)point.x) / colWidth;
+    NSUInteger y = ((NSUInteger)point.y) / rowHeight;
+    
+    return ASHGameBoardPointMake(x, y);
+}
+
+#pragma mark - Overridden Methods
+
 -(void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     

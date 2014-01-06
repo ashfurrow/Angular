@@ -18,6 +18,7 @@
 // Private Access
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
+@property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
 
 @end
 
@@ -50,6 +51,10 @@
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point {
     return [self.gameBoard stateForPoint:point];
+} 
+
+-(void)switchPlayer {
+    self.player = !self.player;
 }
 
 @end
