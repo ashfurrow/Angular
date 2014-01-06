@@ -9,6 +9,7 @@
 #import "ASHGameBoardViewModel.h"
 
 #import "ASHGameBoard.h"
+#import "ASHGameModel.h"
 
 @interface ASHGameBoardViewModel ()
 

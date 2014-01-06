@@ -17,4 +17,6 @@
 // Returns nil if move is invalid.
 -(ASHGameModel *)move:(ASHGameBoardPoint)point isValidForPlayer:(ASHGameBoardPositionState)player;
 
+-(ASHGameBoardPositionState)stateOfBoard;
+
 @end

@@ -21,7 +21,7 @@
     self = [super init];
     if (self == nil) return nil;
     
-    self.gameBoard = gameBoard;
+    self.gameBoard = [gameBoard copy];
     
     return self;
 }
@@ -30,6 +30,11 @@
 
 -(ASHGameModel *)move:(ASHGameBoardPoint)point isValidForPlayer:(ASHGameBoardPositionState)player {
     return nil;
+}
+
+-(ASHGameBoardPositionState)stateOfBoard {
+    // TODO: Determine board state
+    return ASHGameBoardPositionStateUndecided;
 }
 
 @end

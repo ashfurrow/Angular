@@ -39,6 +39,31 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     free(self.board);
 }
 
+#pragma mark - NSCopying Methods
+
+-(id)copyWithZone:(NSZone *)zone {
+    ASHGameBoard *other = [[ASHGameBoard allocWithZone:zone] initWithWidth:self.width height:self.height];
+    memcpy(other.board, self.board, sizeof(ASHGameBoardPositionState) * self.width * self.height);
+    return other;
+}
+
+#pragma mark - Overridden Methods
+
+-(NSString *)description {
+    NSString *superDescription = [super description];
+    NSMutableString *selfDescription = [@"\n" mutableCopy];
+    
+    for (NSUInteger x = 0; x < self.width; x++) {
+        for (NSUInteger y = 0; y < self.height; y++) {
+            [selfDescription appendFormat:@"%d", [self stateForPoint:ASHGameBoardPointMake(x, y)]];
+        }
+        
+        [selfDescription appendFormat:@"\n"];
+    }
+    
+    return [superDescription stringByAppendingString:selfDescription];
+}
+
 #pragma mark - Private Methods
 
 -(void)clearInitialBoard {

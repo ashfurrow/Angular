@@ -9,7 +9,7 @@
 extern const NSUInteger ASHGameBoardDefaultWidth;
 extern const NSUInteger ASHGameBoardDefaultHeight;
 
-@interface ASHGameBoard : NSObject
+@interface ASHGameBoard : NSObject <NSCopying>
 
 @property (nonatomic, readonly) NSUInteger width;
 @property (nonatomic, readonly) NSUInteger height;
