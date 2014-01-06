@@ -116,6 +116,7 @@
 }
 
 -(BOOL)propagateInAllDirectionsFromPoint:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    //TODO: Sometimes doesn't propagate left.
     BOOL propagated =
     [self propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player] ||
     [self propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player] ||
