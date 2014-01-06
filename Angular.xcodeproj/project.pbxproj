@@ -21,6 +21,7 @@
 		5E246D8B187A301B00C8BDED /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E246D6D187A301A00C8BDED /* UIKit.framework */; };
 		5E246D93187A301B00C8BDED /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E246D91187A301B00C8BDED /* InfoPlist.strings */; };
 		5E246D95187A301B00C8BDED /* AngularTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246D94187A301B00C8BDED /* AngularTests.m */; };
+		5E246DA0187A309D00C8BDED /* ASHGameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246D9F187A309D00C8BDED /* ASHGameBoardViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		5E246D90187A301B00C8BDED /* AngularTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AngularTests-Info.plist"; sourceTree = "<group>"; };
 		5E246D92187A301B00C8BDED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E246D94187A301B00C8BDED /* AngularTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AngularTests.m; sourceTree = "<group>"; };
+		5E246D9E187A309D00C8BDED /* ASHGameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameBoardViewController.h; sourceTree = "<group>"; };
+		5E246D9F187A309D00C8BDED /* ASHGameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoardViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,7 @@
 				5E246D78187A301A00C8BDED /* ASHAppDelegate.h */,
 				5E246D79187A301A00C8BDED /* ASHAppDelegate.m */,
 				5E246D7B187A301A00C8BDED /* Main.storyboard */,
+				5E246DA1187A30B400C8BDED /* Board */,
 				5E246D7E187A301A00C8BDED /* ASHViewController.h */,
 				5E246D7F187A301A00C8BDED /* ASHViewController.m */,
 				5E246D81187A301A00C8BDED /* Images.xcassets */,
@@ -150,6 +154,15 @@
 				5E246D91187A301B00C8BDED /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E246DA1187A30B400C8BDED /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				5E246D9E187A309D00C8BDED /* ASHGameBoardViewController.h */,
+				5E246D9F187A309D00C8BDED /* ASHGameBoardViewController.m */,
+			);
+			name = Board;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E246DA0187A309D00C8BDED /* ASHGameBoardViewController.m in Sources */,
 				5E246D76187A301A00C8BDED /* main.m in Sources */,
 				5E246D7A187A301A00C8BDED /* ASHAppDelegate.m in Sources */,
 				5E246D80187A301A00C8BDED /* ASHViewController.m in Sources */,
