@@ -101,8 +101,8 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     ASHGameModel *newModel = [model makeMove:point forPlayer:stateForPlayer(self.player)];
     if (newModel != nil) {
         [self switchPlayer];
-        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
         self.gameModel = newModel;
+        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
     }
     
     return newModel != nil;
