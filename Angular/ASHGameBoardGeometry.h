@@ -18,3 +18,8 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
     ASHGameBoardPositionStatePlayerA,
     ASHGameBoardPositionStatePlayerB
 };
+
+static inline ASHGameBoardPoint ASHGameBoardPointMake(NSUInteger x, NSUInteger y)
+{
+    ASHGameBoardPoint p; p.x = x; p.y = y; return p;
+}
