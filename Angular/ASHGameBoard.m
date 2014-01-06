@@ -7,6 +7,7 @@
 //
 
 #import "ASHGameBoard.h"
+#import "ASHGameBoard+Private.h"
 
 const NSUInteger ASHGameBoardDefaultWidth = 8;
 const NSUInteger ASHGameBoardDefaultHeight = 8;

@@ -8,12 +8,7 @@
 
 #import "ASHGameModel.h"
 #import "ASHGameBoard.h"
-
-@interface ASHGameBoard (Private)
-
--(void)setState:(ASHGameBoardPositionState)state forPoint:(ASHGameBoardPoint)point;
-
-@end
+#import "ASHGameBoard+Private.h"
 
 @interface ASHGameModel ()
 
