@@ -8,12 +8,7 @@
 
 #import "ASHGameModel.h"
 #import "ASHGameBoard.h"
-
-@interface ASHGameBoard (Private)
-
--(void)setState:(ASHGameBoardPositionState)state forPoint:(ASHGameBoardPoint)point;
-
-@end
+#import "ASHGameBoard+Private.h"
 
 @interface ASHGameModel ()
 
@@ -46,22 +41,167 @@
     return self;
 }
 
-#pragma mark - NSCopying methods
+#pragma mark - NSCopying Methods
 
 -(id)copyWithZone:(NSZone *)zone {
     return [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
 }
 
-#pragma mark - Public Methods
+#pragma mark - Private Methods
 
--(ASHGameModel *)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player {
-    //TODO: This. 
-    return NO;
+-(BOOL)propagateInDirection:(ASHGameBoardPoint)vector fromPoint:(ASHGameBoardPoint)point initialPoint:(ASHGameBoardPoint)initialPoint forPlayer:(ASHGameBoardPositionState)player {
+    /*
+     Propagating: first check if point and initialPoint are the same. If they are, then this is the first invocation of
+     the recursion, so point+vector should be an *enemy* tile. Otherwise, stop the recursion when we get outside the
+     board (return false), we hit an unnoccupied tile (return false) or we hit a friendly tile (return true).
+     */
+    
+    BOOL firstInvocation = ASHGameBoardPointEqualToPoint(point, initialPoint);
+    ASHGameBoardPoint newPoint = ASHGameBoardPointMake(point.x + vector.x, point.y + vector.y);
+    BOOL withinBounds = newPoint.x >= 0 && newPoint.y >= 0 && newPoint.x < self.gameBoard.width && newPoint.y < self.gameBoard.height;
+    
+    ASHGameBoardPositionState enemyState = (player == ASHGameBoardPositionStatePlayerA ? ASHGameBoardPositionStatePlayerB : ASHGameBoardPositionStatePlayerA);
+    ASHGameBoardPositionState friendlyState = player;
+    
+    if (withinBounds == NO) {
+        return NO;
+    } else if (firstInvocation) {
+        ASHGameBoardPositionState actualState = [self.gameBoard stateForPoint:newPoint];
+        
+        if (actualState == enemyState) {
+            // continue recursion
+            BOOL success = [self propagateInDirection:vector fromPoint:newPoint initialPoint:initialPoint forPlayer:player];
+            if (success) {
+                [self.gameBoard setState:friendlyState forPoint:newPoint];
+            }
+            
+            return success;
+        } else {
+            // state is either friendly or undecided – stop recursion
+            return NO;
+        }
+    } else {
+        ASHGameBoardPositionState actualState = [self.gameBoard stateForPoint:newPoint];
+        
+        if (actualState == ASHGameBoardPositionStateUndecided) {
+            return NO;
+        } else if (actualState == friendlyState) {
+            return YES;
+        } else {
+            // continue recursion
+            BOOL success = [self propagateInDirection:vector fromPoint:newPoint initialPoint:initialPoint forPlayer:player];
+            if (success) {
+                [self.gameBoard setState:friendlyState forPoint:newPoint];
+            }
+            
+            return success;
+        }
+    }
 }
 
--(ASHGameBoardPositionState)stateOfBoard {
-    // TODO: Determine board state
-    return ASHGameBoardPositionStateUndecided;
+-(BOOL)moveIsLegal:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    /*
+     Checking for legality of a move: it must be an unnoccupied square and propagating in
+     at least one direction must yield a success.
+     */
+    
+    if ([self.gameBoard stateForPoint:point] != ASHGameBoardPositionStateUndecided) {
+        return NO;
+    } else {
+        ASHGameModel *model = [self copy];
+        BOOL propagated = [model propagateInAllDirectionsFromPoint:point forPlayer:player];
+        
+        return propagated;
+    }
+}
+
+-(BOOL)propagateInAllDirectionsFromPoint:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    BOOL propagated = NO;
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1, -1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1,  0) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1,  0) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1,  1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 0,  1) fromPoint:point initialPoint:point forPlayer:player];
+    propagated |= [self propagateInDirection:ASHGameBoardPointMake( 1,  1) fromPoint:point initialPoint:point forPlayer:player];
+    
+    if (propagated) {
+        [self.gameBoard setState:player forPoint:point];
+    }
+    
+    return propagated;
+}
+
+#pragma mark - Public Methods
+
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    NSAssert(player != ASHGameBoardPositionStateUndecided, @"Move must be made by a player. ");
+    BOOL moveIsLegal = [self moveIsLegal:point forPlayer:player];
+    
+    if (moveIsLegal == NO) {
+        return nil;
+    } else {
+        ASHGameModel *model = [self copy];
+        [model propagateInAllDirectionsFromPoint:point forPlayer:player];
+        return model;
+    }
+}
+
+-(BOOL)playerHasValidMove:(ASHGameBoardPositionState)player {
+    BOOL played = NO;
+    for (NSUInteger x = 0; x < self.gameBoard.width && played == NO; x++) {
+        for (NSUInteger y = 0; y < self.gameBoard.height && played == NO; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            
+            ASHGameModel *model = [self copy];
+            BOOL success = [model makeMove:point forPlayer:player] != nil;
+            
+            if (success) {
+                played = YES;
+            }
+        }
+    }
+    
+    return played;
+}
+
+-(ASHGameModelBoardState)stateOfBoard {
+    /*
+     Game over conditions: 
+     - the board is full
+     - players A nor B have a valid move
+     */
+    
+    NSUInteger playerACount = 0, playerBCount = 0;
+    BOOL boardIsFull = YES;
+    for (NSUInteger x = 0; x < self.gameBoard.width; x++) {
+        for (NSUInteger y = 0; y < self.gameBoard.height; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            ASHGameBoardPositionState state = [self.gameBoard stateForPoint:point];
+            if (state == ASHGameBoardPositionStateUndecided) {
+                boardIsFull = NO;
+            } else if (state == ASHGameBoardPositionStatePlayerA) {
+                playerACount++;
+            } else {
+                playerBCount++;
+            }
+        }
+    }
+    
+    BOOL playerHasValidMove = [self playerHasValidMove:ASHGameBoardPositionStatePlayerA] || [self playerHasValidMove:ASHGameBoardPositionStatePlayerB];
+    
+    if (boardIsFull == YES || playerHasValidMove == NO) {
+        if (playerACount > playerBCount) {
+            return ASHGameModelBoardStatePlayerA;
+        } else if (playerBCount > playerACount) {
+            return ASHGameModelBoardStatePlayerB;
+        } else {
+            return ASHGameModelBoardStateTie;
+        }
+    } else {
+        return ASHGameModelBoardStateUndecided;
+    }
 }
 
 @end

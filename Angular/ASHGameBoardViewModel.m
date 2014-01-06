@@ -25,7 +25,7 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
-@property (nonatomic, strong) RACSubject *gameBoardUpdatedSignal;
+@property (nonatomic, strong) RACSignal *gameBoardUpdatedSignal;
 @property (nonatomic, strong) RACSubject *gameOverSignal;
 
 @end
@@ -41,10 +41,20 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     self.gameBoardWidth = self.gameModel.gameBoard.width;
     self.gameBoardHeight = self.gameModel.gameBoard.height;
     
+    self.gameBoardUpdatedSignal = RACObserve(self, gameModel.gameBoard);
+    self.gameOverSignal = [RACSubject subject];
+    
     @weakify(self);
-    self.gameBoardUpdatedSignal = [RACSubject subject];
-    [self.gameBoardUpdatedSignal subscribeNext:^(id x) {
+    [self.gameBoardUpdatedSignal subscribeNext:^(id _) {
         @strongify(self);
+        
+        if ([self.gameModel playerHasValidMove:stateForPlayer(self.player)] == NO) {
+            [self switchPlayer];
+            
+            if ([self.gameModel playerHasValidMove:stateForPlayer(self.player)] == NO) {
+                [self gameOver];
+            }
+        }
         
         if (self.player == ASHGameBoardViewModelPlayerB) {
             [self makeAIMove];
@@ -82,12 +92,16 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 }
 
 -(void)checkForWin {
-    ASHGameBoardPositionState state = self.gameModel.stateOfBoard;
+    ASHGameModelBoardState state = self.gameModel.stateOfBoard;
     
-    if (state != ASHGameBoardPositionStateUndecided) {
-        [(RACSubject *)self.gameOverSignal sendNext:@(state)];
-        [(RACSubject *)self.gameOverSignal sendCompleted];
+    if (state != ASHGameModelBoardStateUndecided) {
+        [self gameOver];
     }
+}
+
+-(void)gameOver {
+    [(RACSubject *)self.gameOverSignal sendNext:@(self.gameModel.stateOfBoard)];
+    [(RACSubject *)self.gameOverSignal sendCompleted];
 }
 
 #pragma mark - Public Methods
@@ -101,7 +115,6 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     ASHGameModel *newModel = [model makeMove:point forPlayer:stateForPlayer(self.player)];
     if (newModel != nil) {
         [self switchPlayer];
-        [(RACSubject *)self.gameBoardUpdatedSignal sendNext:newModel.gameBoard];
         self.gameModel = newModel;
     }
     

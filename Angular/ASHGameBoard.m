@@ -7,6 +7,7 @@
 //
 
 #import "ASHGameBoard.h"
+#import "ASHGameBoard+Private.h"
 
 const NSUInteger ASHGameBoardDefaultWidth = 8;
 const NSUInteger ASHGameBoardDefaultHeight = 8;
@@ -53,8 +54,8 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     NSString *superDescription = [super description];
     NSMutableString *selfDescription = [@"\n" mutableCopy];
     
-    for (NSUInteger x = 0; x < self.width; x++) {
-        for (NSUInteger y = 0; y < self.height; y++) {
+    for (NSUInteger y = 0; y < self.height; y++) {
+        for (NSUInteger x = 0; x < self.width; x++) {
             [selfDescription appendFormat:@"%d", [self stateForPoint:ASHGameBoardPointMake(x, y)]];
         }
         
@@ -75,7 +76,7 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
 }
 
 -(ASHGameBoardPositionState*)positionStateAtPoint:(ASHGameBoardPoint)point {
-    return &self.board[point.x * self.width + point.y];
+    return &(self.board[point.x * self.width + point.y]);
 }
 
 #pragma mark - Public Methods

@@ -19,7 +19,10 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
     ASHGameBoardPositionStatePlayerB
 };
 
-static inline ASHGameBoardPoint ASHGameBoardPointMake(NSInteger x, NSInteger y)
-{
+static inline ASHGameBoardPoint ASHGameBoardPointMake(NSInteger x, NSInteger y) {
     ASHGameBoardPoint p; p.x = x; p.y = y; return p;
+}
+
+static inline BOOL ASHGameBoardPointEqualToPoint(ASHGameBoardPoint p1, ASHGameBoardPoint p2) {
+    return p1.x == p2.x && p1.y == p2.y;
 }
