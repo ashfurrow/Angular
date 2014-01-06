@@ -6,6 +6,10 @@
 //  Copyright (c) 2014 Ash Furrow. All rights reserved.
 //
 
+@protocol ASHGameBoardViewDataSource <NSObject>
+
+@end
+
 @interface ASHGameBoardView : UIView
 
 @end

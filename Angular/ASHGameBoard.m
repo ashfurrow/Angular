@@ -8,6 +8,9 @@
 
 #import "ASHGameBoard.h"
 
+const NSUInteger ASHGameBoardDefaultWidth = 8;
+const NSUInteger ASHGameBoardDefaultHeight = 8;
+
 @interface ASHGameBoard ()
 
 @property (nonatomic, assign) NSUInteger width;

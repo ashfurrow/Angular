@@ -16,6 +16,9 @@ struct ASHGameBoardPoint {
 typedef struct ASHGameBoardPoint ASHGameBoardPoint;
 
 
+extern const NSUInteger ASHGameBoardDefaultWidth;
+extern const NSUInteger ASHGameBoardDefaultHeight;
+
 typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
     ASHGameBoardPositionStateUndecided = 0,
     ASHGameBoardPositionStatePlayerA,
