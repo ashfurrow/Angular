@@ -46,6 +46,14 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     [self.gameBoardUpdatedSignal subscribeNext:^(id x) {
         @strongify(self);
         
+        if ([self.gameModel playerHasValidMove:stateForPlayer(self.player)] == NO) {
+            [self switchPlayer];
+            
+            if ([self.gameModel playerHasValidMove:stateForPlayer(self.player)] == NO) {
+                [self gameOver];
+            }
+        }
+        
         if (self.player == ASHGameBoardViewModelPlayerB) {
             [self makeAIMove];
         }
@@ -85,9 +93,13 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
     ASHGameModelBoardState state = self.gameModel.stateOfBoard;
     
     if (state != ASHGameModelBoardStateUndecided) {
-        [(RACSubject *)self.gameOverSignal sendNext:@(state)];
-        [(RACSubject *)self.gameOverSignal sendCompleted];
+        [self gameOver];
     }
+}
+
+-(void)gameOver {
+    [(RACSubject *)self.gameOverSignal sendNext:@(self.gameModel.stateOfBoard)];
+    [(RACSubject *)self.gameOverSignal sendCompleted];
 }
 
 #pragma mark - Public Methods

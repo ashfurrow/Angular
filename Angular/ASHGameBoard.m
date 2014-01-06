@@ -76,7 +76,7 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
 }
 
 -(ASHGameBoardPositionState*)positionStateAtPoint:(ASHGameBoardPoint)point {
-    return &self.board[point.x * self.width + point.y];
+    return &(self.board[point.x + point.y * self.height]);
 }
 
 #pragma mark - Public Methods

@@ -148,6 +148,10 @@
     }
 }
 
+-(BOOL)playerHasValidMove:(ASHGameBoardPositionState)player {
+    return YES;
+}
+
 -(ASHGameModelBoardState)stateOfBoard {
     // TODO: Determine board state
     return ASHGameModelBoardStateUndecided;
