@@ -6,6 +6,13 @@
 //  Copyright (c) 2014 Ash Furrow. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, ASHGameModelBoardState) {
+    ASHGameModelBoardStatePlayerA = 0,
+    ASHGameModelBoardStatePlayerB,
+    ASHGameModelBoardStateTie,
+    ASHGameModelBoardStateUndecided
+};
+
 @class ASHGameBoard;
 
 @interface ASHGameModel : NSObject <NSCopying>
@@ -15,7 +22,7 @@
 @property (nonatomic, readonly) ASHGameBoard *gameBoard;
 
 // Returns a new game model representing the new board position, or nil if unnacceptable move.
--(ASHGameModel *)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player;
--(ASHGameBoardPositionState)stateOfBoard;
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player;
+-(ASHGameModelBoardState)stateOfBoard;
 
 @end

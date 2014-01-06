@@ -82,9 +82,9 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 }
 
 -(void)checkForWin {
-    ASHGameBoardPositionState state = self.gameModel.stateOfBoard;
+    ASHGameModelBoardState state = self.gameModel.stateOfBoard;
     
-    if (state != ASHGameBoardPositionStateUndecided) {
+    if (state != ASHGameModelBoardStateUndecided) {
         [(RACSubject *)self.gameOverSignal sendNext:@(state)];
         [(RACSubject *)self.gameOverSignal sendCompleted];
     }

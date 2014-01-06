@@ -41,22 +41,29 @@
     return self;
 }
 
-#pragma mark - NSCopying methods
+#pragma mark - NSCopying Methods
 
 -(id)copyWithZone:(NSZone *)zone {
     return [[ASHGameModel alloc] initWithGameBoard:self.gameBoard];
 }
 
-#pragma mark - Public Methods
+#pragma mark - Private Methods
 
--(ASHGameModel *)makeMove:(ASHGameBoardPoint)pointer forPlayer:(ASHGameBoardPositionState)player {
-    //TODO: This. 
+-(BOOL)moveIsLegal:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
     return NO;
 }
 
--(ASHGameBoardPositionState)stateOfBoard {
+#pragma mark - Public Methods
+
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    NSAssert(player != ASHGameBoardPositionStateUndecided, @"Move must be made by a player. ");
+    //TODO: This. 
+    return nil;
+}
+
+-(ASHGameModelBoardState)stateOfBoard {
     // TODO: Determine board state
-    return ASHGameBoardPositionStateUndecided;
+    return ASHGameModelBoardStateUndecided;
 }
 
 @end
