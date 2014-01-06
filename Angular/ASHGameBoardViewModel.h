@@ -10,4 +10,9 @@
 
 @interface ASHGameBoardViewModel : RVMViewModel
 
+@property (nonatomic, readonly) NSUInteger gameBoardWidth;
+@property (nonatomic, readonly) NSUInteger gameBoardHeight;
+
+-(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
+
 @end

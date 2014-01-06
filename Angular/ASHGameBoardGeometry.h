@@ -12,3 +12,9 @@ struct ASHGameBoardPoint {
 };
 
 typedef struct ASHGameBoardPoint ASHGameBoardPoint;
+
+typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
+    ASHGameBoardPositionStateUndecided = 0,
+    ASHGameBoardPositionStatePlayerA,
+    ASHGameBoardPositionStatePlayerB
+};

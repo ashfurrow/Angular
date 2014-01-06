@@ -11,6 +11,12 @@
 #endif
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
+
+// Standard iOS nonsense
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+// Custom #imports
+#import "ASHGameBoardGeometry.h"
+
 #endif

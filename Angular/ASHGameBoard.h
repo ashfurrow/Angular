@@ -6,21 +6,15 @@
 //  Copyright (c) 2014 Ash Furrow. All rights reserved.
 //
 
-#import "ASHGameBoardGeometry.h"
-
 extern const NSUInteger ASHGameBoardDefaultWidth;
 extern const NSUInteger ASHGameBoardDefaultHeight;
-
-typedef NS_ENUM(NSUInteger, ASHGameBoardPositionState) {
-    ASHGameBoardPositionStateUndecided = 0,
-    ASHGameBoardPositionStatePlayerA,
-    ASHGameBoardPositionStatePlayerB
-};
 
 @interface ASHGameBoard : NSObject
 
 @property (nonatomic, readonly) NSUInteger width;
 @property (nonatomic, readonly) NSUInteger height;
+
+-(instancetype)initWithWidth:(NSUInteger)width height:(NSUInteger)height;
 
 -(ASHGameBoardPositionState)stateForPosition:(ASHGameBoardPoint)point;
 

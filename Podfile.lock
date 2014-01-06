@@ -90,21 +90,21 @@ PODS:
   - ReactiveCocoa/Core (2.1.8):
     - ReactiveCocoa/no-arc
   - ReactiveCocoa/no-arc (2.1.8)
-  - ReactiveViewModel (0.1.1):
+  - ReactiveViewModel (0.2):
     - ReactiveCocoa (~> 2.1)
   - UIColor-Utilities (1.0.1)
 
 DEPENDENCIES:
   - libextobjc (= 0.3)
   - ReactiveCocoa (= 2.1.8)
-  - ReactiveViewModel (= 0.1.1)
+  - ReactiveViewModel (= 0.2)
   - UIColor-Utilities (= 1.0.1)
 
 SPEC CHECKSUMS:
   libextobjc: 820a79dbbbc498611e04fffd07d2d52a5588e7ac
   libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
   ReactiveCocoa: 0db710a0afa1c627a64470e5c912a3870d4854ae
-  ReactiveViewModel: e6cba4e138cfdaac19ea326bf42f6d6a61245f2c
+  ReactiveViewModel: f636ab3e06b5e69664b69c883fcdb457ab5cb0cb
   UIColor-Utilities: a392783be1b72e5d5ad9ae450ef2280239441bc8
 
 COCOAPODS: 0.29.0
