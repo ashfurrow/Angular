@@ -47,7 +47,6 @@
         @strongify(self);
         
         ASHGameBoardPoint point = [self.view pointAtPoint:[recognizer locationInView:self.view]];
-        NSLog(@"%d, %d", point.x, point.y);
         
         [self.viewModel makePlay:point];
     }];
