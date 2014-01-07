@@ -13,9 +13,9 @@ Design is ongoing. Send suggestions [to our designer](http://twitter.com/ashleyk
 Progress
 ----------------
 
-- [x] Game model, mechanics, etc
-- [ ] AI with multiple levels of difficulty
-- [ ] Board UI (physics-based, natch)
+- Game model, mechanics, etc ✓
+- AI with multiple levels of difficulty
+- Board UI (physics-based, natch)
 
 License
 ----------------
