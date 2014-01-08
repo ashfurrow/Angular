@@ -43,7 +43,11 @@
             UIColor *color;
             switch (type) {
                 case ASHGameBoardViewDisplayTypeEmpty:
-                    color = nil;
+                    if ((x+y)%2 == 0) {
+                        color = [UIColor colorWithWhite:0.45f alpha:1.0f];
+                    } else {
+                        color = [UIColor colorWithWhite:0.5f alpha:1.0f];
+                    }
                     break;
                 case ASHGameBoardViewDisplayTypeBlue:
                     color = [UIColor blueColor];
@@ -52,11 +56,9 @@
                     color = [UIColor redColor];
             }
             
-            if (color) {
-                [color set];
-                
-                UIRectFill(CGRectMake(width*x, height*y, width, height));
-            }
+            [color set];
+            
+            UIRectFill(CGRectMake(width*x, height*y, width, height));
         }
     }
 }

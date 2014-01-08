@@ -10,11 +10,13 @@
 
 #import "ASHGameBoard.h"
 #import "ASHGameModel.h"
+#import "ASHComputerPlayerModel.h"
 
-static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
+ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     return player == ASHGameBoardViewModelPlayerA ? ASHGameBoardPositionStatePlayerA : ASHGameBoardPositionStatePlayerB;
 }
 
+#define kComputerPlayer ASHGameBoardPositionStatePlayerB
 
 @interface ASHGameBoardViewModel ()
 
@@ -73,22 +75,9 @@ static ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer play
 }
 
 -(void)makeAIMove {
-    // Stupid AI for now
-    // TODO: Write smarter AI
-    BOOL played = NO;
-    for (NSUInteger x = 0; x < self.gameBoardWidth && played == NO; x++) {
-        for (NSUInteger y = 0; y < self.gameBoardHeight && played == NO; y++) {
-            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
-            
-            ASHGameModel *model = [self.gameModel copy];
-            BOOL success = [model makeMove:point forPlayer:stateForPlayer(self.player)] != nil;
-            
-            if (success) {
-                [self makePlay:point];
-                played = YES;
-            }
-        }
-    }
+    ASHComputerPlayerModel *computerPlayer = [[ASHComputerPlayerModel alloc] initWithGameModel:self.gameModel];
+    ASHGameBoardPoint play = [computerPlayer bestMoveForPlayer:kComputerPlayer];
+    [self makePlay:play];
 }
 
 -(void)checkForWin {

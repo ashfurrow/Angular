@@ -27,6 +27,7 @@
 		5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DA6187A32A500C8BDED /* ASHGameBoardView.m */; };
 		5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAA187A334900C8BDED /* ASHGameBoard.m */; };
 		5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAE187A56A600C8BDED /* ASHGameModel.m */; settings = {COMPILER_FLAGS = "-O0"; }; };
+		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		5E246DAD187A56A600C8BDED /* ASHGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameModel.h; sourceTree = "<group>"; };
 		5E246DAE187A56A600C8BDED /* ASHGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameModel.m; sourceTree = "<group>"; };
 		5E246DB1187B0F7900C8BDED /* ASHGameBoard+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASHGameBoard+Private.h"; sourceTree = "<group>"; };
+		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
+		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -199,6 +202,8 @@
 				5E246DAA187A334900C8BDED /* ASHGameBoard.m */,
 				5E246DAD187A56A600C8BDED /* ASHGameModel.h */,
 				5E246DAE187A56A600C8BDED /* ASHGameModel.m */,
+				5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */,
+				5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */,
 				5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */,
 				5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */,
 				5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */,
