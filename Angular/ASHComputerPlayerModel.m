@@ -44,7 +44,9 @@
     for (NSValue *move in possibleMoves) {
 //      (* Initial call *)
 //      alphabeta(origin, depth, -∞, +∞, TRUE)
-        NSInteger score = [ASHComputerPlayerModel alphaBeta:self.gameModel depth:5 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
+        ASHGameModel *model = [self.gameModel makeMove:move.gameBoardPointValue forPlayer:player force:YES];
+        NSInteger score = [ASHComputerPlayerModel alphaBeta:model depth:4 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
+        
         if (score > bestScoreSoFar) {
             bestScoreSoFar = score;
             bestMoveSoFar = move.gameBoardPointValue;
@@ -84,8 +86,7 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
     
     if (player == ASHGameBoardPositionStatePlayerA) {
         for (NSValue *move in possibleMoves) {
-            ASHGameModel *model = [gameModel copy];
-            [model makeMove:move.gameBoardPointValue forPlayer:player];
+            ASHGameModel *model = [gameModel makeMove:move.gameBoardPointValue forPlayer:player force:YES];
             
             alpha = MAX(alpha, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerB initialPlayer:initialPlayer]);
             if (beta <= alpha) {
@@ -96,8 +97,7 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
         return alpha;
     } else {
         for (NSValue *move in possibleMoves) {
-            ASHGameModel *model = [gameModel copy];
-            [model makeMove:move.gameBoardPointValue forPlayer:player];
+            ASHGameModel *model = [gameModel makeMove:move.gameBoardPointValue forPlayer:player force:YES];
             
             beta = MIN(beta, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerA initialPlayer:initialPlayer]);
             if (beta <= alpha) {

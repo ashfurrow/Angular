@@ -136,8 +136,19 @@
 #pragma mark - Public Methods
 
 -(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    return [self makeMove:point forPlayer:player force:NO];
+}
+
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player force:(BOOL)force {
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Move must be made by a player. ");
-    BOOL moveIsLegal = [self moveIsLegal:point forPlayer:player];
+    
+    BOOL moveIsLegal = NO;
+    
+    if (force) {
+        moveIsLegal = YES;
+    } else {
+        moveIsLegal = [self moveIsLegal:point forPlayer:player];
+    }
     
     if (moveIsLegal == NO) {
         return nil;
@@ -167,6 +178,7 @@
 }
 
 -(NSArray *)possibleMovesForPlayer:(ASHGameBoardPositionState)player {
+    //TODO: This is hella slow. 
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
     
     NSMutableArray *mutableArray = [NSMutableArray array];
