@@ -78,9 +78,13 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
         return β
 */
 +(NSInteger)alphaBeta:(ASHGameModel *)gameModel depth:(NSInteger)depth alpha:(NSInteger)alpha beta:(NSInteger)beta maximisingPlayer:(ASHGameBoardPositionState)player initialPlayer:(ASHGameBoardPositionState)initialPlayer {
+    if (depth == 0) {
+        return [self scoreForGameModel:gameModel player:initialPlayer];
+    }
+    
     NSArray *possibleMoves = [gameModel possibleMovesForPlayer:player];
     
-    if (depth == 0 || possibleMoves.count == 0) {
+    if (possibleMoves.count == 0) {
         return [self scoreForGameModel:gameModel player:initialPlayer];
     }
     
