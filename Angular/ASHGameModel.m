@@ -244,4 +244,14 @@
     }
 }
 
+#pragma mark - Overridden methods
+
+-(BOOL)isEqual:(ASHGameModel *)other {
+    return [self.gameBoard isEqual:other.gameBoard];
+}
+
+-(NSUInteger)hash {
+    return [self.gameBoard hash];
+}
+
 @end

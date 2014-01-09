@@ -82,4 +82,25 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     *pointer = state;
 }
 
+#pragma mark - Overridden methods
+
+-(BOOL)isEqual:(ASHGameBoard *)other {
+    if (other.width != self.width || other.height != self.height) return NO;
+    
+    for (NSInteger i = 0; i < self.width*self.height; i++) {
+        if (self.board[i] != other.board[i]) return NO;
+    }
+    
+    return YES;
+}
+
+-(NSUInteger)hash {
+    NSUInteger hash = 0;
+    for (NSInteger i = 0; i < self.width*self.height && i < 32; i++) {
+        hash = hash | (1 << self.board[i]);
+    }
+    
+    return hash;
+}
+
 @end

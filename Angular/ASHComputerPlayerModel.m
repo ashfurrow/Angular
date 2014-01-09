@@ -7,6 +7,7 @@
 //
 
 #import "ASHComputerPlayerModel.h"
+#import "RACDelegateProxy.h"
 
 // Models
 #import "ASHGameBoard.h"
@@ -20,6 +21,21 @@
 @end
 
 @implementation ASHComputerPlayerModel
+
++(NSCache *)cache {
+    static NSCache *cache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        cache = [NSCache new];
+        RACDelegateProxy *delegate = [[RACDelegateProxy alloc] initWithProtocol:@protocol(NSCacheDelegate)];
+        [[delegate rac_signalForSelector:@selector(cache:willEvictObject:)] subscribeNext:^(id x) {
+            NSLog(@"Cache is evicting: %@", x);
+        }];
+        cache.delegate = (id<NSCacheDelegate>)delegate;
+    });
+    
+    return cache;
+}
 
 #pragma mark - Initializers
 
@@ -85,10 +101,18 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
         return [self scoreForGameModel:gameModel player:initialPlayer];
     }
     
+    NSNumber *score = [[self cache] objectForKey:gameModel];
+    if (score) {
+        NSLog(@"Cache hit!");
+        return [score integerValue];
+    }
+    
     NSArray *possibleMoves = [gameModel possibleMovesForPlayer:player];
     
     if (possibleMoves.count == 0) {
-        return [self scoreForGameModel:gameModel player:initialPlayer];
+        NSInteger score = [self scoreForGameModel:gameModel player:initialPlayer];
+        [[self cache] setObject:@(score) forKey:gameModel];
+        return score;
     }
     
     if (player == ASHGameBoardPositionStatePlayerA) {
