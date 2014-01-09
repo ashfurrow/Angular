@@ -27,6 +27,8 @@
     self = [super init];
     if (self == nil) return nil;
     
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"difficulty": @(5)}];
+    
     self.gameModel = gameModel;
     
     return self;
@@ -37,6 +39,7 @@
 -(ASHGameBoardPoint)bestMoveForPlayer:(ASHGameBoardPositionState)player {
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
     
+    NSInteger depth = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
     NSArray *possibleMoves = [self.gameModel possibleMovesForPlayer:player];
     
     NSInteger bestScoreSoFar = NSIntegerMin;
@@ -45,7 +48,7 @@
 //      (* Initial call *)
 //      alphabeta(origin, depth, -∞, +∞, TRUE)
         ASHGameModel *model = [self.gameModel makeMove:move.gameBoardPointValue forPlayer:player force:YES];
-        NSInteger score = [ASHComputerPlayerModel alphaBeta:model depth:5 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
+        NSInteger score = [ASHComputerPlayerModel alphaBeta:model depth:depth alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
         
         if (score > bestScoreSoFar) {
             bestScoreSoFar = score;
