@@ -45,7 +45,7 @@
 //      (* Initial call *)
 //      alphabeta(origin, depth, -∞, +∞, TRUE)
         ASHGameModel *model = [self.gameModel makeMove:move.gameBoardPointValue forPlayer:player force:YES];
-        NSInteger score = [ASHComputerPlayerModel alphaBeta:model depth:4 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
+        NSInteger score = [ASHComputerPlayerModel alphaBeta:model depth:5 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
         
         if (score > bestScoreSoFar) {
             bestScoreSoFar = score;
@@ -118,10 +118,19 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
             ASHGameBoardPositionState state = [gameModel.gameBoard stateForPoint:point];
             
             if (state != ASHGameBoardPositionStateUndecided) {
+                NSInteger delta = 1;
+                BOOL xSide = (x == 0 || x == gameModel.gameBoard.width - 1);
+                BOOL ySide = (y == 0 || y == gameModel.gameBoard.height - 1);
+                BOOL corner = xSide && ySide;
+                if (corner) {
+                    delta = 10;
+                } else if (xSide || ySide) {
+                    delta = 3;
+                }
                 if (state == player) {
-                    score++;
+                    score += delta;
                 } else  {
-                    score--;
+                    score -= delta;
                 }
             }
         }
