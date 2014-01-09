@@ -22,7 +22,7 @@ Progress
 - AI with multiple levels of difficulty
 - Board UI (physics-based, natch)
 
-![Screenshot](http://f.cl.ly/items/30473L0y171G0o0v0F0y/iOS%20Simulator%20Screen%20shot%20Jan%207,%202014,%205.34.14%20PM.png)
+![Screenshot](http://f.cl.ly/items/45082v2w462x243c3n3d/iOS%20Simulator%20Screen%20shot%20Jan%209,%202014,%207.59.06%20AM.png)
 
 License
 ----------------
