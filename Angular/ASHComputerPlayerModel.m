@@ -21,6 +21,8 @@
 
 @implementation ASHComputerPlayerModel
 
+#pragma mark - Initializers
+
 -(instancetype)initWithGameModel:(ASHGameModel *)gameModel {
     self = [super init];
     if (self == nil) return nil;
@@ -30,24 +32,14 @@
     return self;
 }
 
+#pragma mark - Public Methods
+
 -(ASHGameBoardPoint)bestMoveForPlayer:(ASHGameBoardPositionState)player {
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
-    BOOL played = NO;
-    ASHGameBoardPoint play;
     
-    for (NSUInteger x = 0; x < self.gameModel.gameBoard.width && played == NO; x++) {
-        for (NSUInteger y = 0; y < self.gameModel.gameBoard.height && played == NO; y++) {
-            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
-            
-            ASHGameModel *model = [self.gameModel copy];
-            BOOL success = [model makeMove:point forPlayer:player] != nil;
-            
-            if (success) {
-                play = ASHGameBoardPointMake(x, y);
-                played = YES;
-            }
-        }
-    }
+    NSArray *possibleMoves = [self.gameModel possibleMovesForPlayer:player];
+    NSValue *playValue = [possibleMoves firstObject];
+    ASHGameBoardPoint play = [playValue gameBoardPointValue];
     
     return play;
 }

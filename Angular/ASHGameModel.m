@@ -166,6 +166,28 @@
     return played;
 }
 
+-(NSArray *)possibleMovesForPlayer:(ASHGameBoardPositionState)player {
+    NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
+    
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    
+    for (NSUInteger x = 0; x < self.gameBoard.width; x++) {
+        for (NSUInteger y = 0; y < self.gameBoard.height; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            
+            ASHGameModel *model = [self copy];
+            BOOL success = [model makeMove:point forPlayer:player] != nil;
+            
+            if (success) {
+                ASHGameBoardPoint play = ASHGameBoardPointMake(x, y);
+                [mutableArray addObject:[NSValue valueWithGameBoardPoint:play]];
+            }
+        }
+    }
+    
+    return [NSArray arrayWithArray:mutableArray];
+}
+
 -(ASHGameModelBoardState)stateOfBoard {
     /*
      Game over conditions: 

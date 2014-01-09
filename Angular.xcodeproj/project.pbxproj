@@ -27,6 +27,7 @@
 		5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DA6187A32A500C8BDED /* ASHGameBoardView.m */; };
 		5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAA187A334900C8BDED /* ASHGameBoard.m */; };
 		5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DAE187A56A600C8BDED /* ASHGameModel.m */; settings = {COMPILER_FLAGS = "-O0"; }; };
+		5E246DB4187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DB3187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,8 @@
 		5E246DAD187A56A600C8BDED /* ASHGameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameModel.h; sourceTree = "<group>"; };
 		5E246DAE187A56A600C8BDED /* ASHGameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameModel.m; sourceTree = "<group>"; };
 		5E246DB1187B0F7900C8BDED /* ASHGameBoard+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ASHGameBoard+Private.h"; sourceTree = "<group>"; };
+		5E246DB2187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+ASHGameBoardGeometry.h"; sourceTree = "<group>"; };
+		5E246DB3187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+ASHGameBoardGeometry.m"; sourceTree = "<group>"; };
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				5E246DAC187A396600C8BDED /* ASHGameBoardGeometry.h */,
+				5E246DB2187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.h */,
+				5E246DB3187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m */,
 				5E246DA9187A334900C8BDED /* ASHGameBoard.h */,
 				5E246DB1187B0F7900C8BDED /* ASHGameBoard+Private.h */,
 				5E246DAA187A334900C8BDED /* ASHGameBoard.m */,
@@ -347,6 +352,7 @@
 				5E246DA7187A32A500C8BDED /* ASHGameBoardView.m in Sources */,
 				5E246DA0187A309D00C8BDED /* ASHGameBoardViewController.m in Sources */,
 				5E246D76187A301A00C8BDED /* main.m in Sources */,
+				5E246DB4187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m in Sources */,
 				5E246D7A187A301A00C8BDED /* ASHAppDelegate.m in Sources */,
 				5E246D80187A301A00C8BDED /* ASHViewController.m in Sources */,
 				5E246DA4187A329900C8BDED /* ASHGameBoardViewModel.m in Sources */,

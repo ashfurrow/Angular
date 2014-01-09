@@ -18,6 +18,7 @@
 
 // Custom #imports
 #import "ASHGameBoardGeometry.h"
+#import "NSValue+ASHGameBoardGeometry.h"
 
 // External Frameworks
 #import <ReactiveCocoa/ReactiveCocoa.h>
