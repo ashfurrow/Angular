@@ -29,6 +29,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
 @property (nonatomic, strong) RACSignal *gameBoardUpdatedSignal;
 @property (nonatomic, strong) RACSubject *gameOverSignal;
+@property (nonatomic, strong) RACSignal *computerIsThinkingSignal;
+
+@property (nonatomic, assign) BOOL computerIsThinking;
 
 @end
 
@@ -43,7 +46,8 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     self.gameBoardWidth = self.gameModel.gameBoard.width;
     self.gameBoardHeight = self.gameModel.gameBoard.height;
     
-    self.gameBoardUpdatedSignal = RACObserve(self, gameModel.gameBoard);
+    self.gameBoardUpdatedSignal = [RACObserve(self, gameModel.gameBoard) deliverOn:[RACScheduler mainThreadScheduler]];
+    self.computerIsThinkingSignal = [RACObserve(self, computerIsThinking) deliverOn:[RACScheduler mainThreadScheduler]];
     self.gameOverSignal = [RACSubject subject];
     
     @weakify(self);
@@ -59,7 +63,12 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         }
         
         if (self.player == ASHGameBoardViewModelPlayerB) {
-            [self makeAIMove];
+            [[RACScheduler schedulerWithPriority:RACSchedulerPriorityHigh] schedule:^{
+                self.computerIsThinking = YES;
+                [self makeAIMove];
+                self.computerIsThinking = NO;
+                [self checkForWin];
+            }];
         }
         
         [self checkForWin];

@@ -21,6 +21,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player);
 @property (nonatomic, readonly) NSUInteger gameBoardHeight;
 @property (nonatomic, readonly) ASHGameBoardViewModelPlayer player;
 @property (nonatomic, readonly) RACSignal *gameBoardUpdatedSignal;
+@property (nonatomic, readonly) RACSignal *computerIsThinkingSignal;
 @property (nonatomic, readonly) RACSignal *gameOverSignal;
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
