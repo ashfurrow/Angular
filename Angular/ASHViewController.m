@@ -10,6 +10,9 @@
 
 @interface ASHViewController ()
 
+@property (nonatomic, weak) IBOutlet UIStepper *stepper;
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
 @end
 
 @implementation ASHViewController
@@ -18,6 +21,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    self.stepper.value = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
+    [[self.stepper rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UIStepper *stepper) {
+        [[NSUserDefaults standardUserDefaults] setInteger:stepper.value forKey:@"difficulty"];
+    }];
+    RAC(self.label, text) = [RACObserve(self.stepper, value) map:^id(id value) {
+        return [NSString stringWithFormat:@"Recursions: %@", value];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
