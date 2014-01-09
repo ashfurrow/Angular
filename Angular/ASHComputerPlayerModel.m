@@ -38,15 +38,21 @@
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
     
     NSArray *possibleMoves = [self.gameModel possibleMovesForPlayer:player];
-    NSValue *playValue = [possibleMoves firstObject];
-    ASHGameBoardPoint play = [playValue gameBoardPointValue];
     
-//    (* Initial call *)
-//    alphabeta(origin, depth, -∞, +∞, TRUE)
-    NSInteger score = [ASHComputerPlayerModel alphaBeta:self.gameModel depth:5 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlay:ASHGameBoardPointNull initialPlayer:player];
-    NSLog(@"Best score is %d", score);
+    NSInteger bestScoreSoFar = NSIntegerMin;
+    ASHGameBoardPoint bestMoveSoFar = ASHGameBoardPointNull;
+    for (NSValue *move in possibleMoves) {
+//      (* Initial call *)
+//      alphabeta(origin, depth, -∞, +∞, TRUE)
+        NSInteger score = [ASHComputerPlayerModel alphaBeta:self.gameModel depth:5 alpha:NSIntegerMin beta:NSIntegerMax maximisingPlayer:player initialPlayer:player];
+        if (score > bestScoreSoFar) {
+            bestScoreSoFar = score;
+            bestMoveSoFar = move.gameBoardPointValue;
+        }
+    }
+    NSLog(@"Best move is (%d, %d), score %d", bestMoveSoFar.x, bestMoveSoFar.y, bestScoreSoFar);
     
-    return play;
+    return bestMoveSoFar;
 }
 
 #pragma mark - Private Methods
@@ -69,21 +75,19 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
                 break (* α cut-off *)
         return β
 */
-+(NSInteger)alphaBeta:(ASHGameModel *)gameModel depth:(NSInteger)depth alpha:(NSInteger)alpha beta:(NSInteger)beta maximisingPlayer:(ASHGameBoardPositionState)player initialPlay:(ASHGameBoardPoint)startingPlay initialPlayer:(ASHGameBoardPositionState)initialPlayer {
++(NSInteger)alphaBeta:(ASHGameModel *)gameModel depth:(NSInteger)depth alpha:(NSInteger)alpha beta:(NSInteger)beta maximisingPlayer:(ASHGameBoardPositionState)player initialPlayer:(ASHGameBoardPositionState)initialPlayer {
     NSArray *possibleMoves = [gameModel possibleMovesForPlayer:player];
+    
     if (depth == 0 || possibleMoves.count == 0) {
         return [self scoreForGameModel:gameModel player:initialPlayer];
     }
+    
     if (player == ASHGameBoardPositionStatePlayerA) {
         for (NSValue *move in possibleMoves) {
             ASHGameModel *model = [gameModel copy];
-            ASHGameBoardPoint initialPlay = startingPlay;
-            if (ASHGameBoardPointEqualToPoint(initialPlay, ASHGameBoardPointNull)) {
-                initialPlay = move.gameBoardPointValue;
-            }
-            
             [model makeMove:move.gameBoardPointValue forPlayer:player];
-            alpha = MAX(alpha, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerB initialPlay:initialPlay initialPlayer:initialPlayer]);
+            
+            alpha = MAX(alpha, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerB initialPlayer:initialPlayer]);
             if (beta <= alpha) {
                 break;
             }
@@ -93,13 +97,9 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
     } else {
         for (NSValue *move in possibleMoves) {
             ASHGameModel *model = [gameModel copy];
-            ASHGameBoardPoint initialPlay = startingPlay;
-            if (ASHGameBoardPointEqualToPoint(initialPlay, ASHGameBoardPointNull)) {
-                initialPlay = move.gameBoardPointValue;
-            }
-            
             [model makeMove:move.gameBoardPointValue forPlayer:player];
-            beta = MIN(beta, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerA initialPlay:initialPlay initialPlayer:initialPlayer]);
+            
+            beta = MIN(beta, [self alphaBeta:model depth:depth-1 alpha:alpha beta:beta maximisingPlayer:ASHGameBoardPositionStatePlayerA initialPlayer:initialPlayer]);
             if (beta <= alpha) {
                 break;
             }
@@ -117,10 +117,12 @@ function alphabeta(node, depth, α, β, maximizingPlayer)
             ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
             ASHGameBoardPositionState state = [gameModel.gameBoard stateForPoint:point];
             
-            if (state == player) {
-                score++;
-            } else if (state != ASHGameBoardPositionStateUndecided) {
-                score--;
+            if (state != ASHGameBoardPositionStateUndecided) {
+                if (state == player) {
+                    score++;
+                } else  {
+                    score--;
+                }
             }
         }
     }
