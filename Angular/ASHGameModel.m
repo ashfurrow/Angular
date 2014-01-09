@@ -109,13 +109,20 @@
         return NO;
     } else {
         ASHGameModel *model = [self copy];
-        BOOL propagated = [model propagateInAllDirectionsFromPoint:point forPlayer:player];
-        
-        return propagated;
+        return 
+        [model propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake( 1, -1) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake(-1,  0) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake( 1,  0) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake(-1,  1) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake( 0,  1) fromPoint:point initialPoint:point forPlayer:player] ||
+        [model propagateInDirection:ASHGameBoardPointMake( 1,  1) fromPoint:point initialPoint:point forPlayer:player];
     }
 }
 
 -(BOOL)propagateInAllDirectionsFromPoint:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    // Must do it this way to avoid compiler short-cutting.
     BOOL propagated = NO;
     propagated |= [self propagateInDirection:ASHGameBoardPointMake(-1, -1) fromPoint:point initialPoint:point forPlayer:player];
     propagated |= [self propagateInDirection:ASHGameBoardPointMake( 0, -1) fromPoint:point initialPoint:point forPlayer:player];
@@ -136,8 +143,19 @@
 #pragma mark - Public Methods
 
 -(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player {
+    return [self makeMove:point forPlayer:player force:NO];
+}
+
+-(ASHGameModel *)makeMove:(ASHGameBoardPoint)point forPlayer:(ASHGameBoardPositionState)player force:(BOOL)force {
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Move must be made by a player. ");
-    BOOL moveIsLegal = [self moveIsLegal:point forPlayer:player];
+    
+    BOOL moveIsLegal = NO;
+    
+    if (force) {
+        moveIsLegal = YES;
+    } else {
+        moveIsLegal = [self moveIsLegal:point forPlayer:player];
+    }
     
     if (moveIsLegal == NO) {
         return nil;
@@ -174,13 +192,13 @@
     for (NSUInteger x = 0; x < self.gameBoard.width; x++) {
         for (NSUInteger y = 0; y < self.gameBoard.height; y++) {
             ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+
+            BOOL unoccupied = [self.gameBoard stateForPoint:point] == ASHGameBoardPositionStateUndecided;
             
-            ASHGameModel *model = [self copy];
-            BOOL success = [model makeMove:point forPlayer:player] != nil;
-            
-            if (success) {
-                ASHGameBoardPoint play = ASHGameBoardPointMake(x, y);
-                [mutableArray addObject:[NSValue valueWithGameBoardPoint:play]];
+            if (unoccupied) {
+                if ([self moveIsLegal:point forPlayer:player]) {
+                    [mutableArray addObject:[NSValue valueWithGameBoardPoint:point]];
+                }
             }
         }
     }
