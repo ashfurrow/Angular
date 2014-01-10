@@ -244,10 +244,6 @@
     }
 }
 
--(NSInteger)scoreForPlayer:(ASHGameBoardPositionState)player {
-    return 0;
-}
-
 #pragma mark - Overridden methods
 
 -(BOOL)isEqual:(ASHGameModel *)other {

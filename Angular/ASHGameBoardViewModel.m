@@ -77,8 +77,15 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         [self checkForWin];
     }];
     
-    RAC(self, turnString) = [RACObserve(self, player) map:^id(id value) {
-        return [value integerValue] == ASHGameModelBoardStatePlayerA ? @"It's your turn" : @"It's my turn";
+    RAC(self, turnString) = [self.gameBoardUpdatedSignal map:^id(id value) {
+        @strongify(self);
+        //lol
+        return self.player == ASHGameModelBoardStatePlayerA ? @"It's your turn" : @"It's my turn";
+    }];
+    RAC(self, scoreString) = [self.gameBoardUpdatedSignal map:^id(ASHGameBoard *gameBoard) {
+        NSInteger a = [gameBoard scoreForPlayer:ASHGameBoardPositionStatePlayerA];
+        NSInteger b = [gameBoard scoreForPlayer:ASHGameBoardPositionStatePlayerB];
+        return [NSString stringWithFormat:@"%d : %d", a, b];
     }];
     
     return self;
@@ -102,15 +109,11 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     if (state != ASHGameModelBoardStateUndecided) {
         [self gameOver];
     }
-    
-    NSInteger a = [self.gameModel scoreForPlayer:ASHGameBoardPositionStatePlayerA];
-    NSInteger b = [self.gameModel scoreForPlayer:ASHGameBoardPositionStatePlayerB];
-    self.scoreString = [NSString stringWithFormat:@"%d : %d", a, b];
 }
 
 -(void)gameOver {
     ASHGameModelBoardState state = self.gameModel.stateOfBoard;
-    NSString *message = [NSString stringWithFormat:@"%@ win!", state == ASHGameModelBoardStatePlayerA ? @"You" : @"The computer"];
+    NSString *message = [NSString stringWithFormat:@"%@ win!", state == ASHGameModelBoardStatePlayerA ? @"You" : @"I"];
     [(RACSubject *)self.gameOverSignal sendNext:message];
     [(RACSubject *)self.gameOverSignal sendCompleted];
 }
