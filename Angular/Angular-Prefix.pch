@@ -23,5 +23,6 @@
 // External Frameworks
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <libextobjc/EXTScope.h>
+#import <UIColor-Utilities/UIColor+Expanded.h>
 
 #endif

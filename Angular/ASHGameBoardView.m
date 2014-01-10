@@ -36,6 +36,11 @@
     const CGFloat width = CGRectGetWidth(self.bounds) / cols;
     const CGFloat height = CGRectGetHeight(self.bounds) / rows;
     
+    UIColor *evenGrey = [UIColor colorWithHexString:@"E6FBFF"];
+    UIColor *oddGreg = [UIColor colorWithHexString:@"cfe2e6"];
+    UIColor *blue = [UIColor colorWithHexString:@"63E4FF"];
+    UIColor *red = [UIColor colorWithHexString:@"FF4733"];
+    
     for (NSUInteger x = 0; x < cols; x++) {
         for (NSUInteger y = 0; y < rows; y++) {
             ASHGameBoardViewDisplayType type = [self.dataSource displayTypeForPoint:ASHGameBoardPointMake(x, y)];
@@ -44,16 +49,16 @@
             switch (type) {
                 case ASHGameBoardViewDisplayTypeEmpty:
                     if ((x+y)%2 == 0) {
-                        color = [UIColor colorWithWhite:0.45f alpha:1.0f];
+                        color = evenGrey;
                     } else {
-                        color = [UIColor colorWithWhite:0.5f alpha:1.0f];
+                        color = oddGreg;
                     }
                     break;
                 case ASHGameBoardViewDisplayTypeBlue:
-                    color = [UIColor blueColor];
+                    color = blue;
                     break;
                 case ASHGameBoardViewDisplayTypeRed:
-                    color = [UIColor redColor];
+                    color = red;
             }
             
             [color set];

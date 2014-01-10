@@ -46,7 +46,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     self.gameBoardWidth = self.gameModel.gameBoard.width;
     self.gameBoardHeight = self.gameModel.gameBoard.height;
     
-    self.gameBoardUpdatedSignal = [RACObserve(self, gameModel.gameBoard) deliverOn:[RACScheduler mainThreadScheduler]];
+    self.gameBoardUpdatedSignal = [RACObserve(self, gameModel.gameBoard) deliverOn:[RACScheduler mainThreadScheduler]];  
     self.computerIsThinkingSignal = [RACObserve(self, computerIsThinking) deliverOn:[RACScheduler mainThreadScheduler]];
     self.gameOverSignal = [RACSubject subject];
     
