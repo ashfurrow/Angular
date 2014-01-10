@@ -8,7 +8,7 @@ This project is under active development.
 Design
 ----------------
 
-Design is ongoing. Send suggestions [to our designer](http://twitter.com/ashleykrista).
+Design is ongoing. Send suggestions [to our designer](http://twitter.com/ashleykrista). Colour theme from [Colour Lovers](http://www.colourlovers.com/palette/1932830/Dreaming?widths=0).
 
 Building
 ----------------
