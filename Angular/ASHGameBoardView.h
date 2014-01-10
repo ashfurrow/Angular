@@ -18,12 +18,14 @@ typedef NS_ENUM(NSUInteger, ASHGameBoardViewDisplayType) {
 
 -(NSUInteger)numberOfColumnsForGameBoardView:(ASHGameBoardView *)gameBoardView;
 -(NSUInteger)numberOfRowsForGameBoardView:(ASHGameBoardView *)gameBoardView;
--(ASHGameBoardViewDisplayType)displayTypeForPoint:(ASHGameBoardPoint)point;
 
 @end
 
+@class ASHGameBoardViewModel;
+
 @interface ASHGameBoardView : UIView
 
+@property (nonatomic, weak) ASHGameBoardViewModel *viewModel;
 @property (nonatomic, weak) id<ASHGameBoardViewDataSource> dataSource;
 
 -(ASHGameBoardPoint)pointAtPoint:(CGPoint)point;

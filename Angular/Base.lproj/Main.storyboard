@@ -17,7 +17,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="igg-WO-c9v" kind="embed" id="5Lz-Nu-9oO"/>
+                                    <segue destination="igg-WO-c9v" kind="embed" identifier="board" id="5Lz-Nu-9oO"/>
                                 </connections>
                             </containerView>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" id="BZQ-c4-NOl">

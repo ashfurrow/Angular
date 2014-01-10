@@ -30,6 +30,7 @@
 	// Do any additional setup after loading the view.
     
     self.viewModel = [[ASHGameBoardViewModel alloc] init];
+    self.view.viewModel = self.viewModel;
     
     self.view.dataSource = self;
     
