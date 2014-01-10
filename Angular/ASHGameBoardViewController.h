@@ -8,4 +8,6 @@
 
 @interface ASHGameBoardViewController : UIViewController
 
+-(void)newGame;
+
 @end

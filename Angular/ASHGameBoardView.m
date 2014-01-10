@@ -14,6 +14,10 @@
 #import "ASHGameBoardViewModel.h"
 #import "ASHGameBoard.h"
 
+float randomFloat() {
+    return (float)rand()/(float)RAND_MAX;
+}
+
 @interface ASHGameBoardView ()
 
 @property (nonatomic, strong) ASHGameBoard *gameBoard;
@@ -141,7 +145,121 @@
     self.gameBoard = newGameBoard;
 }
 
+-(UIBezierPath *)pathForLayer:(CALayer *)layer parentRect:(CGRect)rect
+{
+    UIBezierPath *particlePath = [UIBezierPath bezierPath];
+    [particlePath moveToPoint:layer.position];
+    
+    float r = ((float)rand()/(float)RAND_MAX) + 0.3f;
+    float r2 = ((float)rand()/(float)RAND_MAX)+ 0.4f;
+    float r3 = r*r2;
+    
+    int upOrDown = (r <= 0.5) ? 1 : -1;
+    
+    CGPoint curvePoint = CGPointZero;
+    CGPoint endPoint = CGPointZero;
+    
+    float maxLeftRightShift = 1.f * randomFloat();
+    
+    CGFloat layerYPosAndHeight = (self.superview.frame.size.height-((layer.position.y+layer.frame.size.height)))*randomFloat();
+    CGFloat layerXPosAndHeight = (self.superview.frame.size.width-((layer.position.x+layer.frame.size.width)))*r3;
+    
+    float endY = self.superview.frame.size.height-self.frame.origin.y;
+    
+    if (layer.position.x <= rect.size.width*0.5)
+    {
+        //going left
+        endPoint = CGPointMake(-layerXPosAndHeight, endY);
+        curvePoint= CGPointMake((((layer.position.x*0.5)*r3)*upOrDown)*maxLeftRightShift,-layerYPosAndHeight);
+    }
+    else
+    {
+        endPoint = CGPointMake(layerXPosAndHeight, endY);
+        curvePoint= CGPointMake((((layer.position.x*0.5)*r3)*upOrDown+rect.size.width)*maxLeftRightShift, -layerYPosAndHeight);
+    }
+    
+    [particlePath addQuadCurveToPoint:endPoint
+                         controlPoint:curvePoint];
+    
+    return particlePath;
+    
+}
+
 #pragma mark - Public Methods
+
+-(void)newGame {
+    self.piecesDictionary = [NSMutableDictionary dictionary];
+    self.gameBoard = nil;
+    
+    NSArray *subviews = self.subviews;
+    
+    // Inspired by https://github.com/vibrazy/letterpressexplosion
+    [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+        CALayer *layer = view.layer;
+        
+        //Path
+        CAKeyframeAnimation *moveAnim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+        moveAnim.path = [[self pathForLayer:layer parentRect:self.bounds] CGPath];
+        moveAnim.removedOnCompletion = YES;
+        moveAnim.fillMode=kCAFillModeForwards;
+        NSArray *timingFunctions = [NSArray arrayWithObjects:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],nil];
+        [moveAnim setTimingFunctions:timingFunctions];
+        
+        float r = randomFloat();
+        
+        NSTimeInterval speed = 2.35*r;
+        
+        CAKeyframeAnimation *transformAnim = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+        
+        CATransform3D startingScale = layer.transform;
+        CATransform3D endingScale = CATransform3DConcat(CATransform3DMakeScale(randomFloat(), randomFloat(), randomFloat()), CATransform3DMakeRotation(M_PI*(1+randomFloat()), randomFloat(), randomFloat(), randomFloat()));
+        
+        NSArray *boundsValues = [NSArray arrayWithObjects:[NSValue valueWithCATransform3D:startingScale],
+                                 
+                                 [NSValue valueWithCATransform3D:endingScale], nil];
+        [transformAnim setValues:boundsValues];
+        
+        NSArray *times = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
+                          [NSNumber numberWithFloat:speed*.25], nil];
+        [transformAnim setKeyTimes:times];
+        
+        
+        timingFunctions = [NSArray arrayWithObjects:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut],
+                           [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn],
+                           [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut], [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+                           nil];
+        [transformAnim setTimingFunctions:timingFunctions];
+        transformAnim.fillMode = kCAFillModeForwards;
+        transformAnim.removedOnCompletion = NO;
+        
+        //alpha
+        CABasicAnimation *opacityAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
+        opacityAnim.fromValue = [NSNumber numberWithFloat:1.0f];
+        opacityAnim.toValue = [NSNumber numberWithFloat:0.f];
+        opacityAnim.removedOnCompletion = NO;
+        opacityAnim.fillMode =kCAFillModeForwards;
+        
+        
+        CAAnimationGroup *animGroup = [CAAnimationGroup animation];
+        animGroup.animations = [NSArray arrayWithObjects:moveAnim,transformAnim,opacityAnim, nil];
+        animGroup.duration = speed;
+        animGroup.fillMode =kCAFillModeForwards;
+        animGroup.delegate = self;
+        [animGroup setValue:layer forKey:@"animationLayer"];
+        [layer addAnimation:animGroup forKey:nil];
+        
+        //take it off screen
+        [layer setPosition:CGPointMake(0, -600)];
+    }];
+    
+    double delayInSeconds = 4.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+            [view removeFromSuperview];
+        }];
+    });
+}
 
 -(ASHGameBoardPoint)pointAtPoint:(CGPoint)point {
     NSUInteger cols = [self.dataSource numberOfColumnsForGameBoardView:self];

@@ -60,6 +60,17 @@
     [self.view setNeedsDisplay];
 }
 
+#pragma mark - Public Methods
+
+-(void)newGame {
+    [self.view newGame];
+    double delayInSeconds = 1.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.viewModel newGame];
+    });
+}
+
 #pragma mark - ASHGameBoardViewDataSource Methods
 
 -(NSUInteger)numberOfColumnsForGameBoardView:(ASHGameBoardView *)gameBoardView {
@@ -68,19 +79,6 @@
 
 -(NSUInteger)numberOfRowsForGameBoardView:(ASHGameBoardView *)gameBoardView {
     return self.viewModel.gameBoardHeight;
-}
-
--(ASHGameBoardViewDisplayType)displayTypeForPoint:(ASHGameBoardPoint)point {
-    ASHGameBoardPositionState state = [self.viewModel stateForPoint:point];
-    
-    switch (state) {
-        case ASHGameBoardPositionStatePlayerA:
-            return ASHGameBoardViewDisplayTypeBlue;
-        case ASHGameBoardPositionStatePlayerB:
-            return ASHGameBoardViewDisplayTypeRed;
-        case ASHGameBoardPositionStateUndecided:
-            return ASHGameBoardViewDisplayTypeEmpty;
-    }
 }
 
 @end

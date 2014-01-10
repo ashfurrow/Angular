@@ -26,5 +26,6 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player);
 
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
 -(BOOL)makePlay:(ASHGameBoardPoint)point;
+-(void)newGame;
 
 @end

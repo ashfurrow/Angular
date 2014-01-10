@@ -119,4 +119,8 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     return newModel != nil;
 }
 
+-(void)newGame {
+    self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
+}
+
 @end

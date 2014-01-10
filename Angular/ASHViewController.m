@@ -7,11 +7,14 @@
 //
 
 #import "ASHViewController.h"
+#import "ASHGameBoardViewController.h"
 
 @interface ASHViewController ()
 
 @property (nonatomic, weak) IBOutlet UIStepper *stepper;
 @property (nonatomic, weak) IBOutlet UILabel *label;
+
+@property (nonatomic, weak) ASHGameBoardViewController *boardController;
 
 @end
 
@@ -31,10 +34,14 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"board"]) {
+        self.boardController = segue.destinationViewController;
+    }
+}
+
+- (IBAction)newGame:(id)sender {
+    [self.boardController newGame];
 }
 
 @end
