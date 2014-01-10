@@ -7,11 +7,15 @@
 //
 
 #import "ASHViewController.h"
+#import "ASHGameBoardViewController.h"
 
 @interface ASHViewController ()
 
-@property (nonatomic, weak) IBOutlet UIStepper *stepper;
-@property (nonatomic, weak) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, weak) IBOutlet UILabel *turnLabel;
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
+
+@property (nonatomic, weak) ASHGameBoardViewController *boardController;
 
 @end
 
@@ -22,19 +26,24 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.stepper.value = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
-    [[self.stepper rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UIStepper *stepper) {
-        [[NSUserDefaults standardUserDefaults] setInteger:stepper.value forKey:@"difficulty"];
+    NSInteger difficulty = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
+    self.segmentedControl.selectedSegmentIndex = difficulty;
+    [[self.segmentedControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISegmentedControl *segmentedControl) {
+        [[NSUserDefaults standardUserDefaults] setInteger:[segmentedControl selectedSegmentIndex] forKey:@"difficulty"];
     }];
-    RAC(self.label, text) = [RACObserve(self.stepper, value) map:^id(id value) {
-        return [NSString stringWithFormat:@"Recursions: %@", value];
-    }];
+    
+    RAC(self.turnLabel, text) = RACObserve(self, boardController.turnString);
+    RAC(self.scoreLabel, text) = RACObserve(self, boardController.scoreString);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"board"]) {
+        self.boardController = segue.destinationViewController;
+    }
+}
+
+- (IBAction)newGame:(id)sender {
+    [self.boardController newGame];
 }
 
 @end

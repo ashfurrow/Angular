@@ -31,6 +31,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 @property (nonatomic, strong) RACSubject *gameOverSignal;
 @property (nonatomic, strong) RACSignal *computerIsThinkingSignal;
 
+@property (nonatomic, strong) NSString *scoreString;
+@property (nonatomic, strong) NSString *turnString;
+
 @property (nonatomic, assign) BOOL computerIsThinking;
 
 @end
@@ -74,6 +77,17 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         [self checkForWin];
     }];
     
+    RAC(self, turnString) = [self.gameBoardUpdatedSignal map:^id(id value) {
+        @strongify(self);
+        //lol
+        return self.player == ASHGameModelBoardStatePlayerA ? @"It's your turn" : @"It's my turn";
+    }];
+    RAC(self, scoreString) = [self.gameBoardUpdatedSignal map:^id(ASHGameBoard *gameBoard) {
+        NSInteger a = [gameBoard scoreForPlayer:ASHGameBoardPositionStatePlayerA];
+        NSInteger b = [gameBoard scoreForPlayer:ASHGameBoardPositionStatePlayerB];
+        return [NSString stringWithFormat:@"%d : %d", a, b];
+    }];
+    
     return self;
 }
 
@@ -98,7 +112,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 }
 
 -(void)gameOver {
-    [(RACSubject *)self.gameOverSignal sendNext:@(self.gameModel.stateOfBoard)];
+    ASHGameModelBoardState state = self.gameModel.stateOfBoard;
+    NSString *message = [NSString stringWithFormat:@"%@ win!", state == ASHGameModelBoardStatePlayerA ? @"You" : @"I"];
+    [(RACSubject *)self.gameOverSignal sendNext:message];
     [(RACSubject *)self.gameOverSignal sendCompleted];
 }
 
@@ -117,6 +133,10 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     }
     
     return newModel != nil;
+}
+
+-(void)newGame {
+    self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
 }
 
 @end

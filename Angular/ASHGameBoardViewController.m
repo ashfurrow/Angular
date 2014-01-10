@@ -30,6 +30,7 @@
 	// Do any additional setup after loading the view.
     
     self.viewModel = [[ASHGameBoardViewModel alloc] init];
+    self.view.viewModel = self.viewModel;
     
     self.view.dataSource = self;
     
@@ -39,7 +40,7 @@
         [self.view setNeedsDisplay];
     }];
     [[self.viewModel gameOverSignal] subscribeNext:^(id x) {
-        [[[UIAlertView alloc] initWithTitle:@"Game Over" message:@"Game has ended. " delegate:Nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Game Over" message:x delegate:Nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
     }];
     
     UIGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:nil];
@@ -51,12 +52,26 @@
         [self.viewModel makePlay:point];
     }];
     [self.view addGestureRecognizer:recognizer];
+    
+    RAC(self, scoreString) = RACObserve(self.viewModel, scoreString);
+    RAC(self, turnString) = RACObserve(self.viewModel, turnString);
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self.view setNeedsDisplay];
+}
+
+#pragma mark - Public Methods
+
+-(void)newGame {
+    [self.view newGame];
+    double delayInSeconds = 1.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.viewModel newGame];
+    });
 }
 
 #pragma mark - ASHGameBoardViewDataSource Methods
@@ -67,19 +82,6 @@
 
 -(NSUInteger)numberOfRowsForGameBoardView:(ASHGameBoardView *)gameBoardView {
     return self.viewModel.gameBoardHeight;
-}
-
--(ASHGameBoardViewDisplayType)displayTypeForPoint:(ASHGameBoardPoint)point {
-    ASHGameBoardPositionState state = [self.viewModel stateForPoint:point];
-    
-    switch (state) {
-        case ASHGameBoardPositionStatePlayerA:
-            return ASHGameBoardViewDisplayTypeBlue;
-        case ASHGameBoardPositionStatePlayerB:
-            return ASHGameBoardViewDisplayTypeRed;
-        case ASHGameBoardPositionStateUndecided:
-            return ASHGameBoardViewDisplayTypeEmpty;
-    }
 }
 
 @end

@@ -82,6 +82,22 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     *pointer = state;
 }
 
+-(NSInteger)scoreForPlayer:(ASHGameBoardPositionState)player {
+    NSInteger count = 0;
+    
+    for (NSUInteger x = 0; x < self.width; x++) {
+        for (NSUInteger y = 0; y < self.height; y++) {
+            ASHGameBoardPoint point = ASHGameBoardPointMake(x, y);
+            ASHGameBoardPositionState state = [self stateForPoint:point];
+            if (state == player) {
+                count++;
+            }
+        }
+    }
+    
+    return count;
+}
+
 #pragma mark - Overridden methods
 
 -(BOOL)isEqual:(ASHGameBoard *)other {
