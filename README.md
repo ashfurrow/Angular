@@ -22,7 +22,7 @@ Progress
 - AI with multiple levels of difficulty ✓
 - Board UI (physics-based, natch)
 
-![Screenshot](http://f.cl.ly/items/3m3W1v2T0v1S0o2q1P0E/screenshot.gif)
+![Screenshot](http://static.ashfurrow.com/github/angular.gif)
 
 License
 ----------------
