@@ -10,7 +10,6 @@
                 <navigationController definesPresentationContext="YES" id="bS2-fe-qlc" customClass="ASHNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a11-bL-M3Y">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="HcV-K9-MdT"/>
@@ -44,21 +43,21 @@
                                         <rect key="frame" x="20" y="56" width="280" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.99308788780000001" green="0.66267436739999996" blue="0.28221809860000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.98580145835876465" green="0.0" blue="0.31185200810432434" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeJ-MK-JcC">
                                         <rect key="frame" x="20" y="20" width="280" height="28"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.99308788780000001" green="0.66267436739999996" blue="0.28221809860000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.98580145835876465" green="0.0" blue="0.31185200810432434" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.99308788780000001" green="0.66267436739999996" blue="0.28221809860000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="B7w-UE-V9L">

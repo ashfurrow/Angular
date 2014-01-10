@@ -285,8 +285,10 @@ float randomFloat() {
     const CGFloat width = CGRectGetWidth(self.bounds) / cols;
     const CGFloat height = CGRectGetHeight(self.bounds) / rows;
     
-    UIColor *evenGrey = [UIColor colorWithHexString:@"E6FBFF"];
-    UIColor *oddGreg = [UIColor colorWithHexString:@"cfe2e6"];
+//    UIColor *evenGrey = [UIColor colorWithHexString:@"b2803e"];
+//    UIColor *oddGreg = [UIColor colorWithHexString:@"b38850"];
+    UIColor *evenGrey = [UIColor colorWithWhite:0.8 alpha:1.0f];
+    UIColor *oddGreg = [UIColor colorWithWhite:0.9 alpha:1.0f];
     
     for (NSUInteger x = 0; x < cols; x++) {
         for (NSUInteger y = 0; y < rows; y++) {

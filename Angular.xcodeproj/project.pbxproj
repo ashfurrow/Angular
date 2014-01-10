@@ -30,7 +30,6 @@
 		5E246DB4187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DB3187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m */; };
 		5E246DB7187F7AEF00C8BDED /* ASHGameBoardPieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DB6187F7AEF00C8BDED /* ASHGameBoardPieceView.m */; };
 		5E246DB9187F7D9A00C8BDED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */; };
-		5E246DBC187F8A1C00C8BDED /* ASHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DBB187F8A1C00C8BDED /* ASHNavigationController.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
 /* End PBXBuildFile section */
 
@@ -81,8 +80,6 @@
 		5E246DB5187F7AEF00C8BDED /* ASHGameBoardPieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameBoardPieceView.h; sourceTree = "<group>"; };
 		5E246DB6187F7AEF00C8BDED /* ASHGameBoardPieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoardPieceView.m; sourceTree = "<group>"; };
 		5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		5E246DBA187F8A1C00C8BDED /* ASHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHNavigationController.h; sourceTree = "<group>"; };
-		5E246DBB187F8A1C00C8BDED /* ASHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHNavigationController.m; sourceTree = "<group>"; };
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
@@ -158,8 +155,6 @@
 				5E246DA1187A30B400C8BDED /* Board */,
 				5E246D7E187A301A00C8BDED /* ASHViewController.h */,
 				5E246D7F187A301A00C8BDED /* ASHViewController.m */,
-				5E246DBA187F8A1C00C8BDED /* ASHNavigationController.h */,
-				5E246DBB187F8A1C00C8BDED /* ASHNavigationController.m */,
 				5E246D81187A301A00C8BDED /* Images.xcassets */,
 				5E246D70187A301A00C8BDED /* Supporting Files */,
 			);
@@ -363,7 +358,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E246DBC187F8A1C00C8BDED /* ASHNavigationController.m in Sources */,
 				5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */,
 				5E246DAF187A56A600C8BDED /* ASHGameModel.m in Sources */,
 				5E246DAB187A334900C8BDED /* ASHGameBoard.m in Sources */,

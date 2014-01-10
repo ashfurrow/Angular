@@ -14,7 +14,7 @@
 {
     // Override point for customization after application launch.
     
-    self.window.tintColor = [UIColor colorWithHexString:@"FFB759"];
+    self.window.tintColor = [UIColor colorWithHexString:@"FF0062"];
     
     return YES;
 }
