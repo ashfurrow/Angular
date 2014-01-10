@@ -98,7 +98,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 }
 
 -(void)gameOver {
-    [(RACSubject *)self.gameOverSignal sendNext:@(self.gameModel.stateOfBoard)];
+    ASHGameModelBoardState state = self.gameModel.stateOfBoard;
+    NSString *message = [NSString stringWithFormat:@"%@ win!", state == ASHGameModelBoardStatePlayerA ? @"You" : @"The computer"];
+    [(RACSubject *)self.gameOverSignal sendNext:message];
     [(RACSubject *)self.gameOverSignal sendCompleted];
 }
 

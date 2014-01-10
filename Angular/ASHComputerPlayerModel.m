@@ -55,7 +55,21 @@
 -(ASHGameBoardPoint)bestMoveForPlayer:(ASHGameBoardPositionState)player {
     NSAssert(player != ASHGameBoardPositionStateUndecided, @"Player must exist.");
     
-    NSInteger depth = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
+    NSInteger difficulty = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
+    NSInteger depth = 5;
+    
+    switch (difficulty) {
+        case 0:
+            depth = 3;
+            break;
+        case 1:
+            depth = 4;
+            break;
+        case 2:
+            depth = 6;
+            break;
+    }
+    
     NSArray *possibleMoves = [self.gameModel possibleMovesForPlayer:player];
     
     NSInteger bestScoreSoFar = NSIntegerMin;

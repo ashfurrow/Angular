@@ -11,8 +11,7 @@
 
 @interface ASHViewController ()
 
-@property (nonatomic, weak) IBOutlet UIStepper *stepper;
-@property (nonatomic, weak) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @property (nonatomic, weak) ASHGameBoardViewController *boardController;
 
@@ -25,12 +24,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.stepper.value = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
-    [[self.stepper rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UIStepper *stepper) {
-        [[NSUserDefaults standardUserDefaults] setInteger:stepper.value forKey:@"difficulty"];
-    }];
-    RAC(self.label, text) = [RACObserve(self.stepper, value) map:^id(id value) {
-        return [NSString stringWithFormat:@"Recursions: %@", value];
+    NSInteger difficulty = [[NSUserDefaults standardUserDefaults] integerForKey:@"difficulty"];
+    self.segmentedControl.selectedSegmentIndex = difficulty;
+    [[self.segmentedControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISegmentedControl *segmentedControl) {
+        [[NSUserDefaults standardUserDefaults] setInteger:[segmentedControl selectedSegmentIndex] forKey:@"difficulty"];
     }];
 }
 

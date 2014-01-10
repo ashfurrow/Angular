@@ -193,7 +193,7 @@ float randomFloat() {
     
     NSArray *subviews = self.subviews;
     
-    // Inspired by https://github.com/vibrazy/letterpressexplosion
+    // Taken from https://github.com/vibrazy/letterpressexplosion
     [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         CALayer *layer = view.layer;
         

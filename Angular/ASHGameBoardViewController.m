@@ -40,7 +40,7 @@
         [self.view setNeedsDisplay];
     }];
     [[self.viewModel gameOverSignal] subscribeNext:^(id x) {
-        [[[UIAlertView alloc] initWithTitle:@"Game Over" message:@"Game has ended. " delegate:Nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Game Over" message:x delegate:Nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
     }];
     
     UIGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:nil];
