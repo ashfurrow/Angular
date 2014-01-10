@@ -19,7 +19,7 @@ Progress
 ----------------
 
 - Game model, mechanics, etc ✓
-- AI with multiple levels of difficulty
+- AI with multiple levels of difficulty ✓
 - Board UI (physics-based, natch)
 
 ![Screenshot](http://f.cl.ly/items/45082v2w462x243c3n3d/iOS%20Simulator%20Screen%20shot%20Jan%209,%202014,%207.59.06%20AM.png)
