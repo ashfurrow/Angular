@@ -7,7 +7,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0dd-qr-Kg9">
             <objects>
-                <navigationController definesPresentationContext="YES" id="bS2-fe-qlc" customClass="ASHNavigationController" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="bS2-fe-qlc" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a11-bL-M3Y">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNx-X0-XIv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="594" y="235"/>
+            <point key="canvasLocation" x="617" y="155"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

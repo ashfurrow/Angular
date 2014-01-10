@@ -20,7 +20,7 @@ Progress
 
 - Game model, mechanics, etc ✓
 - AI with multiple levels of difficulty ✓
-- Board UI (physics-based, natch)
+- Board UI ✓
 
 ![Screenshot](http://static.ashfurrow.com/github/angular.gif)
 
