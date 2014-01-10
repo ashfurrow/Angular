@@ -31,6 +31,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 @property (nonatomic, strong) RACSubject *gameOverSignal;
 @property (nonatomic, strong) RACSignal *computerIsThinkingSignal;
 
+@property (nonatomic, strong) NSString *scoreString;
+@property (nonatomic, strong) NSString *turnString;
+
 @property (nonatomic, assign) BOOL computerIsThinking;
 
 @end
@@ -74,6 +77,10 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         [self checkForWin];
     }];
     
+    RAC(self, turnString) = [RACObserve(self, player) map:^id(id value) {
+        return [value integerValue] == ASHGameModelBoardStatePlayerA ? @"It's your turn" : @"It's my turn";
+    }];
+    
     return self;
 }
 
@@ -95,6 +102,10 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     if (state != ASHGameModelBoardStateUndecided) {
         [self gameOver];
     }
+    
+    NSInteger a = [self.gameModel scoreForPlayer:ASHGameBoardPositionStatePlayerA];
+    NSInteger b = [self.gameModel scoreForPlayer:ASHGameBoardPositionStatePlayerB];
+    self.scoreString = [NSString stringWithFormat:@"%d : %d", a, b];
 }
 
 -(void)gameOver {

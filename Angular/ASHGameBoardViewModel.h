@@ -24,6 +24,9 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player);
 @property (nonatomic, readonly) RACSignal *computerIsThinkingSignal;
 @property (nonatomic, readonly) RACSignal *gameOverSignal;
 
+@property (nonatomic, readonly) NSString *scoreString;
+@property (nonatomic, readonly) NSString *turnString;
+
 -(ASHGameBoardPositionState)stateForPoint:(ASHGameBoardPoint)point;
 -(BOOL)makePlay:(ASHGameBoardPoint)point;
 -(void)newGame;

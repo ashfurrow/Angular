@@ -12,6 +12,8 @@
 @interface ASHViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (nonatomic, weak) IBOutlet UILabel *turnLabel;
+@property (nonatomic, weak) IBOutlet UILabel *scoreLabel;
 
 @property (nonatomic, weak) ASHGameBoardViewController *boardController;
 
@@ -29,6 +31,9 @@
     [[self.segmentedControl rac_signalForControlEvents:UIControlEventValueChanged] subscribeNext:^(UISegmentedControl *segmentedControl) {
         [[NSUserDefaults standardUserDefaults] setInteger:[segmentedControl selectedSegmentIndex] forKey:@"difficulty"];
     }];
+    
+    RAC(self.turnLabel, text) = RACObserve(self, boardController.turnString);
+    RAC(self.scoreLabel, text) = RACObserve(self, boardController.scoreString);
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

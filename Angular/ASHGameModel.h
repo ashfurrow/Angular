@@ -27,5 +27,6 @@ typedef NS_ENUM(NSUInteger, ASHGameModelBoardState) {
 -(BOOL)playerHasValidMove:(ASHGameBoardPositionState)player;
 -(NSArray *)possibleMovesForPlayer:(ASHGameBoardPositionState)player;
 -(ASHGameModelBoardState)stateOfBoard;
+-(NSInteger)scoreForPlayer:(ASHGameBoardPositionState)player;
 
 @end

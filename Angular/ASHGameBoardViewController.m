@@ -52,6 +52,9 @@
         [self.viewModel makePlay:point];
     }];
     [self.view addGestureRecognizer:recognizer];
+    
+    RAC(self, scoreString) = RACObserve(self.viewModel, scoreString);
+    RAC(self, turnString) = RACObserve(self.viewModel, turnString);
 }
 
 -(void)viewWillAppear:(BOOL)animated {

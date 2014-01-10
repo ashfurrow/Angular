@@ -8,6 +8,9 @@
 
 @interface ASHGameBoardViewController : UIViewController
 
+@property (nonatomic, strong) NSString *turnString;
+@property (nonatomic, strong) NSString *scoreString;
+
 -(void)newGame;
 
 @end
