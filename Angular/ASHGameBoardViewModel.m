@@ -27,6 +27,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 @property (nonatomic, assign) NSUInteger gameBoardWidth;
 @property (nonatomic, assign) NSUInteger gameBoardHeight;
 @property (nonatomic, assign) ASHGameBoardViewModelPlayer player;
+@property (nonatomic, strong) RACSignal *playerSignal;
 @property (nonatomic, strong) RACSignal *gameBoardUpdatedSignal;
 @property (nonatomic, strong) RACSubject *gameOverSignal;
 @property (nonatomic, strong) RACSignal *computerIsThinkingSignal;
@@ -52,6 +53,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     self.gameBoardUpdatedSignal = [RACObserve(self, gameModel.gameBoard) deliverOn:[RACScheduler mainThreadScheduler]];  
     self.computerIsThinkingSignal = [RACObserve(self, computerIsThinking) deliverOn:[RACScheduler mainThreadScheduler]];
     self.gameOverSignal = [RACSubject subject];
+    self.playerSignal = [RACObserve(self, player) deliverOn:[RACScheduler mainThreadScheduler]];
     
     @weakify(self);
     [self.gameBoardUpdatedSignal subscribeNext:^(id _) {

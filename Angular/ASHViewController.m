@@ -49,9 +49,11 @@
         ASHGameBoardViewModelPlayer player = [x integerValue];
         
         if (player == ASHGameBoardViewModelPlayerA) {
+            NSLog(@"New Player: A");
             [self.playerATurnView setActive:YES];
             [self.playerBTurnView setActive:NO];
         } else {
+            NSLog(@"New Player: B");
             [self.playerATurnView setActive:NO];
             [self.playerBTurnView setActive:YES];
         }
