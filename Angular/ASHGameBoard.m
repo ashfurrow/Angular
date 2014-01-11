@@ -114,7 +114,8 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
 }
 
 -(void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:[NSData dataWithBytes:self.board length:self.width*self.height] forKey:@"board"];
+    NSData *boardData = [NSData dataWithBytes:self.board length:self.width*self.height*sizeof(ASHGameBoardPositionState)];
+    [aCoder encodeObject:boardData forKey:@"board"];
     [aCoder encodeInteger:self.width forKey:@"width"];
     [aCoder encodeInteger:self.height forKey:@"height"];
 }

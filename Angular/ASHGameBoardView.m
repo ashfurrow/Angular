@@ -120,7 +120,9 @@ float randomFloat() {
         
         [self.piecesDictionary setObject:pieceView forKey:pieceValue];
         
-        [pieceView animateBeingAddedWithDelay:idx * delayPerPiece];
+        if (addedPieces.count < 5) {
+            [pieceView animateBeingAddedWithDelay:idx * delayPerPiece];
+        }
     }];
     
     CGFloat delay = addedPieces.count*delayPerPiece;
