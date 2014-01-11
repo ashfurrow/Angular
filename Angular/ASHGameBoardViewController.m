@@ -55,6 +55,7 @@
     
     RAC(self, playerAScoreString) = RACObserve(self.viewModel, playerAScoreString);
     RAC(self, playerBScoreString) = RACObserve(self.viewModel, playerBScoreString);
+    RAC(self, player) = RACObserve(self.viewModel, player);
 }
 
 -(void)viewWillAppear:(BOOL)animated {

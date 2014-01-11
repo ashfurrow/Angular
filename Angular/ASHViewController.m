@@ -45,6 +45,17 @@
     // RAC Bindings
     RAC(self.playerAScoreLabel, text) = RACObserve(self, boardController.playerAScoreString);
     RAC(self.playerBScoreLabel, text) = RACObserve(self, boardController.playerBScoreString);
+    [RACObserve(self.boardController, player) subscribeNext:^(id x) {
+        ASHGameBoardViewModelPlayer player = [x integerValue];
+        
+        if (player == ASHGameBoardViewModelPlayerA) {
+            [self.playerATurnView setActive:YES];
+            [self.playerBTurnView setActive:NO];
+        } else {
+            [self.playerATurnView setActive:NO];
+            [self.playerBTurnView setActive:YES];
+        }
+    }];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

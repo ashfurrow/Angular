@@ -10,4 +10,6 @@
 
 @interface ASHPlayerIndicatorView : UIView
 
+-(void)setActive:(BOOL)active;
+
 @end
