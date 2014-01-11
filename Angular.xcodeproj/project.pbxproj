@@ -32,6 +32,7 @@
 		5E246DB9187F7D9A00C8BDED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */; };
 		5E246DC01881AF7B00C8BDED /* ASHPlayerIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
+		5EBF4C771881FE6A0055BED4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHPlayerIndicatorView.m; sourceTree = "<group>"; };
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
+		5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 				5E246D6C187A301A00C8BDED /* CoreGraphics.framework in Frameworks */,
 				5E246D6E187A301A00C8BDED /* UIKit.framework in Frameworks */,
 				5E246D6A187A301A00C8BDED /* Foundation.framework in Frameworks */,
+				5EBF4C771881FE6A0055BED4 /* Crashlytics.framework in Frameworks */,
 				43197CB6D4354B298BF60FE1 /* libPods-Angular.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +141,7 @@
 		5E246D68187A301A00C8BDED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */,
 				5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */,
 				5E246D69187A301A00C8BDED /* Foundation.framework */,
 				5E246D6B187A301A00C8BDED /* CoreGraphics.framework */,
@@ -247,6 +251,7 @@
 				5E246D63187A301A00C8BDED /* Frameworks */,
 				5E246D64187A301A00C8BDED /* Resources */,
 				922897D2E5A94230AE54D6DC /* Copy Pods Resources */,
+				5EBF4C751881FE5C0055BED4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -334,6 +339,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5EBF4C751881FE5C0055BED4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run e92912505e9b6327bad28022d04290c3ddffaa82";
+		};
 		8F571ACC48DA47F48CC031D5 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,6 +530,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ash/Dropbox/bin/Angular,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Angular/Angular-Prefix.pch";
 				INFOPLIST_FILE = "Angular/Angular-Info.plist";
@@ -529,6 +551,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ash/Dropbox/bin/Angular,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Angular/Angular-Prefix.pch";
 				INFOPLIST_FILE = "Angular/Angular-Info.plist";
