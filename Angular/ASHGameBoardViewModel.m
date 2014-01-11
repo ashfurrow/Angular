@@ -53,6 +53,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     if (obj) {
         ASHGameBoard *gameBoard = [NSKeyedUnarchiver unarchiveObjectWithData:obj];
         [userDefaults removeObjectForKey:ASHAppDelegateLastBoardKey];
+        [userDefaults synchronize];
         self.gameModel = [[ASHGameModel alloc] initWithBoard:gameBoard];
     } else {
         self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
@@ -62,6 +63,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         NSLog(@"Saving state");
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.gameModel.gameBoard];
         [userDefaults setObject:data forKey:ASHAppDelegateLastBoardKey];
+        [userDefaults synchronize];
     }];
     
     self.gameBoardWidth = self.gameModel.gameBoard.width;

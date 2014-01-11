@@ -104,10 +104,11 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     self = [super init];
     if (self == nil) return nil;
     
-    NSData *boardData = [aDecoder decodeObjectForKey:@"board"];
-    memcpy((void *)[boardData bytes], self.board, sizeof(ASHGameBoardPositionState) * self.width * self.height);
     self.width = [aDecoder decodeIntegerForKey:@"width"];
     self.height = [aDecoder decodeIntegerForKey:@"height"];
+    self.board = calloc(self.width * self.height, sizeof(ASHGameBoardPositionState));
+    NSData *boardData = [aDecoder decodeObjectForKey:@"board"];
+    memcpy(self.board, (void *)[boardData bytes], sizeof(ASHGameBoardPositionState) * self.width * self.height);
     
     return self;
 }
