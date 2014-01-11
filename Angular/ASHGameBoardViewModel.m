@@ -77,11 +77,6 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
         [self checkForWin];
     }];
     
-//    RAC(self, turnString) = [self.gameBoardUpdatedSignal map:^id(id value) {
-//        @strongify(self);
-//        //lol
-//        return self.player == ASHGameModelBoardStatePlayerA ? @"It's your turn" : @"It's my turn";
-//    }];
     RAC(self, playerAScoreString) = [self.gameBoardUpdatedSignal map:^id(ASHGameBoard *gameBoard) {
         NSInteger a = [gameBoard scoreForPlayer:ASHGameBoardPositionStatePlayerA];
         return [NSString stringWithFormat:@"%d", a];
