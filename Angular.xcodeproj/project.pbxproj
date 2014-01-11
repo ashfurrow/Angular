@@ -33,6 +33,7 @@
 		5E246DC01881AF7B00C8BDED /* ASHPlayerIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
 		5EBF4C771881FE6A0055BED4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */; };
+		5EBF4C791881FF950055BED4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5EBF4C781881FF950055BED4 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
 		5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		5EBF4C781881FF950055BED4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 		5E246D5D187A301A00C8BDED = {
 			isa = PBXGroup;
 			children = (
+				5EBF4C781881FF950055BED4 /* Settings.bundle */,
 				5E246D6F187A301A00C8BDED /* Angular */,
 				5E246D8E187A301B00C8BDED /* AngularTests */,
 				5E246D68187A301A00C8BDED /* Frameworks */,
@@ -322,6 +325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EBF4C791881FF950055BED4 /* Settings.bundle in Resources */,
 				5E246D82187A301A00C8BDED /* Images.xcassets in Resources */,
 				5E246D74187A301A00C8BDED /* InfoPlist.strings in Resources */,
 				5E246D7D187A301A00C8BDED /* Main.storyboard in Resources */,
