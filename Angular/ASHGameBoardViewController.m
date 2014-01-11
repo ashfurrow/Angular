@@ -53,8 +53,8 @@
     }];
     [self.view addGestureRecognizer:recognizer];
     
-    RAC(self, scoreString) = RACObserve(self.viewModel, scoreString);
-    RAC(self, turnString) = RACObserve(self.viewModel, turnString);
+    RAC(self, playerAScoreString) = RACObserve(self.viewModel, playerAScoreString);
+    RAC(self, playerBScoreString) = RACObserve(self.viewModel, playerBScoreString);
 }
 
 -(void)viewWillAppear:(BOOL)animated {

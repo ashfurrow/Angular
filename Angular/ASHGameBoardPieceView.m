@@ -13,13 +13,18 @@
 #define kBlueColor [UIColor colorWithHexString:@"63E4FF"]
 #define kRedColor [UIColor colorWithHexString:@"FF4733"]
 
+UIColor *ASHGameBoardPieceViewPlayerAColor;
+UIColor *ASHGameBoardPieceViewPlayerBColor;
+
 @implementation ASHGameBoardPieceView
 
--(instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self == nil) return nil;
-    
-    return self;
++(void)load {
+    [super load];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        ASHGameBoardPieceViewPlayerAColor = kBlueColor;
+        ASHGameBoardPieceViewPlayerBColor = kRedColor;
+    });
 }
 
 -(void)setFrame:(CGRect)frame {
@@ -33,9 +38,9 @@
     _player = player;
     
     if (player == ASHGameBoardPositionStatePlayerA) {
-        self.backgroundColor = kBlueColor;
+        self.backgroundColor = ASHGameBoardPieceViewPlayerAColor;
     } else {
-        self.backgroundColor = kRedColor;
+        self.backgroundColor = ASHGameBoardPieceViewPlayerBColor;
     }
 }
 

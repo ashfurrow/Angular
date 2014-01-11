@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern UIColor *ASHGameBoardPieceViewPlayerAColor;
+extern UIColor *ASHGameBoardPieceViewPlayerBColor;
+
 @interface ASHGameBoardPieceView : UIView
 
 @property (nonatomic, assign) ASHGameBoardPositionState player;

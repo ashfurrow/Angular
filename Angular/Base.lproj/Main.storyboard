@@ -39,18 +39,28 @@
                                 <rect key="frame" x="0.0" y="383" width="320" height="97"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uOW-3Q-Tj0">
-                                        <rect key="frame" x="20" y="56" width="280" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <view contentMode="scaleToFill" id="BSb-De-4ZF" customClass="ASHPlayerIndicatorView">
+                                        <rect key="frame" x="10" y="9" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.9858014584" green="0.0" blue="0.31185200810000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="5Sw-TS-ZMx" customClass="ASHPlayerIndicatorView">
+                                        <rect key="frame" x="230" y="9" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.9858014584" green="0.0" blue="0.31185200810000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NjQ-GM-g6k">
+                                        <rect key="frame" x="98" y="38" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.98580145835876465" green="0.0" blue="0.31185200810432434" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.9858014584" green="0.0" blue="0.31185200810000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeJ-MK-JcC">
-                                        <rect key="frame" x="20" y="20" width="280" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HWt-Ah-Ocr">
+                                        <rect key="frame" x="180" y="38" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.98580145835876465" green="0.0" blue="0.31185200810432434" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.9858014584" green="0.0" blue="0.31185200810000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -78,9 +88,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="scoreLabel" destination="XeJ-MK-JcC" id="wcS-FO-hpr"/>
+                        <outlet property="playerAScoreLabel" destination="NjQ-GM-g6k" id="MMo-E7-l8J"/>
+                        <outlet property="playerATurnView" destination="BSb-De-4ZF" id="vq8-1r-1zh"/>
+                        <outlet property="playerBScoreLabel" destination="HWt-Ah-Ocr" id="0gK-KQ-kdF"/>
+                        <outlet property="playerBTurnView" destination="5Sw-TS-ZMx" id="BCQ-dM-QIJ"/>
                         <outlet property="segmentedControl" destination="ybz-u4-2WZ" id="ZFn-Vo-WMX"/>
-                        <outlet property="turnLabel" destination="uOW-3Q-Tj0" id="HGL-TC-nQj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

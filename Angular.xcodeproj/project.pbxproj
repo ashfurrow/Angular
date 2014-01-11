@@ -30,6 +30,7 @@
 		5E246DB4187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DB3187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m */; };
 		5E246DB7187F7AEF00C8BDED /* ASHGameBoardPieceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DB6187F7AEF00C8BDED /* ASHGameBoardPieceView.m */; };
 		5E246DB9187F7D9A00C8BDED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */; };
+		5E246DC01881AF7B00C8BDED /* ASHPlayerIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,8 @@
 		5E246DB5187F7AEF00C8BDED /* ASHGameBoardPieceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHGameBoardPieceView.h; sourceTree = "<group>"; };
 		5E246DB6187F7AEF00C8BDED /* ASHGameBoardPieceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHGameBoardPieceView.m; sourceTree = "<group>"; };
 		5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5E246DBE1881AF7B00C8BDED /* ASHPlayerIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHPlayerIndicatorView.h; sourceTree = "<group>"; };
+		5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHPlayerIndicatorView.m; sourceTree = "<group>"; };
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
@@ -153,8 +156,7 @@
 				5E246D7B187A301A00C8BDED /* Main.storyboard */,
 				5E246DA8187A333800C8BDED /* Models */,
 				5E246DA1187A30B400C8BDED /* Board */,
-				5E246D7E187A301A00C8BDED /* ASHViewController.h */,
-				5E246D7F187A301A00C8BDED /* ASHViewController.m */,
+				5E246DBD1881AE7800C8BDED /* Top-Level View Controller */,
 				5E246D81187A301A00C8BDED /* Images.xcassets */,
 				5E246D70187A301A00C8BDED /* Supporting Files */,
 			);
@@ -220,6 +222,17 @@
 				5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		5E246DBD1881AE7800C8BDED /* Top-Level View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5E246D7E187A301A00C8BDED /* ASHViewController.h */,
+				5E246D7F187A301A00C8BDED /* ASHViewController.m */,
+				5E246DBE1881AF7B00C8BDED /* ASHPlayerIndicatorView.h */,
+				5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */,
+			);
+			name = "Top-Level View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -366,6 +379,7 @@
 				5E246D76187A301A00C8BDED /* main.m in Sources */,
 				5E246DB4187ECFDE00C8BDED /* NSValue+ASHGameBoardGeometry.m in Sources */,
 				5E246DB7187F7AEF00C8BDED /* ASHGameBoardPieceView.m in Sources */,
+				5E246DC01881AF7B00C8BDED /* ASHPlayerIndicatorView.m in Sources */,
 				5E246D7A187A301A00C8BDED /* ASHAppDelegate.m in Sources */,
 				5E246D80187A301A00C8BDED /* ASHViewController.m in Sources */,
 				5E246DA4187A329900C8BDED /* ASHGameBoardViewModel.m in Sources */,
