@@ -22,7 +22,7 @@ Progress
 - AI with multiple levels of difficulty ✓
 - Board UI ✓
 
-![Screenshot](http://static.ashfurrow.com/github/angular.gif)
+![Screenshot](http://f.cl.ly/items/3k3U441q33162g220J0M/iOS%20Simulator%20Screen%20shot%20Jan%2011,%202014,%201.30.15%20PM.png)
 
 License
 ----------------
