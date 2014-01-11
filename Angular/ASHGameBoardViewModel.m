@@ -11,6 +11,7 @@
 #import "ASHGameBoard.h"
 #import "ASHGameModel.h"
 #import "ASHComputerPlayerModel.h"
+#import "ASHAppDelegate.h"
 
 ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     return player == ASHGameBoardViewModelPlayerA ? ASHGameBoardPositionStatePlayerA : ASHGameBoardPositionStatePlayerB;
@@ -37,6 +38,8 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
 
 @property (nonatomic, assign) BOOL computerIsThinking;
 
+@property (nonatomic, strong) id backgroundObserver;
+
 @end
 
 @implementation ASHGameBoardViewModel
@@ -45,7 +48,21 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     self = [super init];
     if (self == nil) return nil;
     
-    self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    id obj = [userDefaults objectForKey:ASHAppDelegateLastBoardKey];
+    if (obj) {
+        ASHGameBoard *gameBoard = [NSKeyedUnarchiver unarchiveObjectWithData:obj];
+        [userDefaults removeObjectForKey:ASHAppDelegateLastBoardKey];
+        self.gameModel = [[ASHGameModel alloc] initWithBoard:gameBoard];
+    } else {
+        self.gameModel = [[ASHGameModel alloc] initWithInitialBoard];
+    }
+    
+    self.backgroundObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        NSLog(@"Saving state");
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.gameModel.gameBoard];
+        [userDefaults setObject:data forKey:ASHAppDelegateLastBoardKey];
+    }];
     
     self.gameBoardWidth = self.gameModel.gameBoard.width;
     self.gameBoardHeight = self.gameModel.gameBoard.height;
@@ -89,6 +106,10 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     }];
     
     return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self.backgroundObserver];
 }
 
 #pragma mark - Private Methods

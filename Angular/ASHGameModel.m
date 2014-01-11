@@ -32,6 +32,15 @@
     return self;
 }
 
+-(instancetype)initWithBoard:(ASHGameBoard *)board {
+    self = [super init];
+    if (self == nil) return nil;
+    
+    self.gameBoard = [board copy];
+    
+    return self;
+}
+
 -(instancetype)initWithGameBoard:(ASHGameBoard *)gameBoard {
     self = [super init];
     if (self == nil) return nil;

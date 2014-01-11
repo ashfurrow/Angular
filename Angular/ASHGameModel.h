@@ -17,7 +17,8 @@ typedef NS_ENUM(NSUInteger, ASHGameModelBoardState) {
 
 @interface ASHGameModel : NSObject <NSCopying>
 
--(id)initWithInitialBoard;
+-(instancetype)initWithInitialBoard;
+-(instancetype)initWithBoard:(ASHGameBoard *)board;
 
 @property (nonatomic, readonly) ASHGameBoard *gameBoard;
 

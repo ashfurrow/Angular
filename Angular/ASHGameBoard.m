@@ -12,7 +12,7 @@
 const NSUInteger ASHGameBoardDefaultWidth = 8;
 const NSUInteger ASHGameBoardDefaultHeight = 8;
 
-@interface ASHGameBoard ()
+@interface ASHGameBoard () <NSCoding>
 
 @property (nonatomic, assign) NSUInteger width;
 @property (nonatomic, assign) NSUInteger height;
@@ -96,6 +96,26 @@ const NSUInteger ASHGameBoardDefaultHeight = 8;
     }
     
     return count;
+}
+
+#pragma mark - NSCoding Methods
+
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self == nil) return nil;
+    
+    NSData *boardData = [aDecoder decodeObjectForKey:@"board"];
+    memcpy((void *)[boardData bytes], self.board, sizeof(ASHGameBoardPositionState) * self.width * self.height);
+    self.width = [aDecoder decodeIntegerForKey:@"width"];
+    self.height = [aDecoder decodeIntegerForKey:@"height"];
+    
+    return self;
+}
+
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:[NSData dataWithBytes:self.board length:self.width*self.height] forKey:@"board"];
+    [aCoder encodeInteger:self.width forKey:@"width"];
+    [aCoder encodeInteger:self.height forKey:@"height"];
 }
 
 #pragma mark - Overridden methods

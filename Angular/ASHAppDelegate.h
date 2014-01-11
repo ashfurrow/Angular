@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define ASHAppDelegateLastBoardKey  @"board"
+
 @interface ASHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
