@@ -16,7 +16,9 @@
 {
     // Override point for customization after application launch.
     
+    #ifdef DEBUG
     [Crashlytics startWithAPIKey:@"e92912505e9b6327bad28022d04290c3ddffaa82"];
+    #endif
     self.window.tintColor = [UIColor colorWithHexString:@"FF0062"];
     
     return YES;
