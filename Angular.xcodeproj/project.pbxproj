@@ -32,7 +32,7 @@
 		5E246DB9187F7D9A00C8BDED /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */; };
 		5E246DC01881AF7B00C8BDED /* ASHPlayerIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */; };
 		5E95CB91187DC8D2008ADB43 /* ASHComputerPlayerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */; };
-		5EBF4C771881FE6A0055BED4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */; };
+		5EABB25B188855290026B5D9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EABB25A188855290026B5D9 /* Crashlytics.framework */; };
 		5EBF4C791881FF950055BED4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5EBF4C781881FF950055BED4 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,7 @@
 		5E246DBF1881AF7B00C8BDED /* ASHPlayerIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHPlayerIndicatorView.m; sourceTree = "<group>"; };
 		5E95CB8F187DC8D2008ADB43 /* ASHComputerPlayerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASHComputerPlayerModel.h; sourceTree = "<group>"; };
 		5E95CB90187DC8D2008ADB43 /* ASHComputerPlayerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASHComputerPlayerModel.m; sourceTree = "<group>"; };
-		5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		5EABB25A188855290026B5D9 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		5EBF4C781881FF950055BED4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		782A595DB1AC4D3EB11C765C /* Pods-Angular.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Angular.xcconfig"; path = "Pods/Pods-Angular.xcconfig"; sourceTree = "<group>"; };
 		FAC5B1D2F2FE44DB88B73CB0 /* libPods-Angular.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Angular.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,7 +102,7 @@
 				5E246D6C187A301A00C8BDED /* CoreGraphics.framework in Frameworks */,
 				5E246D6E187A301A00C8BDED /* UIKit.framework in Frameworks */,
 				5E246D6A187A301A00C8BDED /* Foundation.framework in Frameworks */,
-				5EBF4C771881FE6A0055BED4 /* Crashlytics.framework in Frameworks */,
+				5EABB25B188855290026B5D9 /* Crashlytics.framework in Frameworks */,
 				43197CB6D4354B298BF60FE1 /* libPods-Angular.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,7 +144,7 @@
 		5E246D68187A301A00C8BDED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5EBF4C761881FE6A0055BED4 /* Crashlytics.framework */,
+				5EABB25A188855290026B5D9 /* Crashlytics.framework */,
 				5E246DB8187F7D9A00C8BDED /* QuartzCore.framework */,
 				5E246D69187A301A00C8BDED /* Foundation.framework */,
 				5E246D6B187A301A00C8BDED /* CoreGraphics.framework */,

@@ -23,11 +23,16 @@
     self.indicatorView = [[UIView alloc] init];
     self.indicatorView.backgroundColor = [UIColor colorWithHexString:@"FFB759"];
     [self addSubview:self.indicatorView];
+    [self updateForFrame];
 }
 
 -(void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     
+    [self updateForFrame];
+}
+
+-(void)updateForFrame {
     self.layer.cornerRadius = CGRectGetMidX(self.bounds);
     self.indicatorView.frame = CGRectInset(self.bounds, 30, 30);
     self.indicatorView.layer.cornerRadius = CGRectGetMidX(self.indicatorView.bounds);
