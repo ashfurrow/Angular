@@ -5,15 +5,10 @@ Angular (name up for debate) is (going to be) a clone of the game [Othello](http
 
 This project is under active development. 
 
-Design
-----------------
-
-Design is ongoing. Send suggestions [to our designer](http://twitter.com/ashleykrista). Colour theme from [Colour Lovers](http://www.colourlovers.com/palette/1932830/Dreaming?widths=0).
-
 Building
 ----------------
 
-Standard build. Clone the repo, then run `pod install`.
+Standard build. Make sure your Cocoapods install is up to date. Clone the repo, then run `pod install`.
 
 Progress
 ----------------
