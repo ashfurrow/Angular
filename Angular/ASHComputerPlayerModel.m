@@ -27,11 +27,6 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         cache = [NSCache new];
-        RACDelegateProxy *delegate = [[RACDelegateProxy alloc] initWithProtocol:@protocol(NSCacheDelegate)];
-        [[delegate rac_signalForSelector:@selector(cache:willEvictObject:)] subscribeNext:^(id x) {
-            NSLog(@"Cache is evicting: %@", x);
-        }];
-        cache.delegate = (id<NSCacheDelegate>)delegate;
     });
     
     return cache;
