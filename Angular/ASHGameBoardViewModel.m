@@ -71,7 +71,7 @@ ASHGameBoardPositionState stateForPlayer(ASHGameBoardViewModelPlayer player) {
     
     self.gameBoardUpdatedSignal = [RACObserve(self, gameModel.gameBoard) deliverOn:[RACScheduler mainThreadScheduler]];  
     self.computerIsThinkingSignal = [RACObserve(self, computerIsThinking) deliverOn:[RACScheduler mainThreadScheduler]];
-    self.gameOverSignal = [RACSubject subject];
+    self.gameOverSignal = [[RACSubject subject] deliverOn:[RACScheduler mainThreadScheduler]];
     self.playerSignal = [RACObserve(self, player) deliverOn:[RACScheduler mainThreadScheduler]];
     
     @weakify(self);
